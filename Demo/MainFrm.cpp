@@ -285,9 +285,16 @@ void CMainFrame::OnUpdateAusgabeDatenreihe(CCmdUI *pCmdUI)
 void CMainFrame::OnEingabeTestdaten()
 {
 	TestdatenGenerieren tg;
+	tg.namen = true;
+	tg.farben = true;
+	tg.werte = true;
+	tg.minimum = -10;
+	tg.maximum = 10;
+	tg.maxAbweichung = 2;
 	if (tg.DoModal())
 	{
 		DemoData.testdaten(tg.minimum, tg.maximum, tg.maxAbweichung, tg.namen, tg.farben, tg.werte);
+		GetActiveDocument()->SetModifiedFlag();
 	}
 }
 
