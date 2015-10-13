@@ -414,6 +414,16 @@ BEGIN
     LTEXT           "Name:",IDC_STATIC,7,17,22,8
 END
 
+IDD_LOESCHWARNUNG DIALOGEX 0, 0, 309, 50
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Warnung"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,198,29,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,252,29,50,14
+    LTEXT           "Wenn Sie fortfahren löschen Sie alle nicht gespeicherten Datein!",IDC_STATIC,7,14,206,8
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -437,6 +447,14 @@ BEGIN
         RIGHTMARGIN, 132
         TOPMARGIN, 7
         BOTTOMMARGIN, 48
+    END
+
+    IDD_LOESCHWARNUNG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 302
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 43
     END
 END
 #endif    // APSTUDIO_INVOKED

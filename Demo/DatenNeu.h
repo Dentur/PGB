@@ -22,4 +22,5 @@ public:
 	CString datenname;
 	int anzahl_z;
 	int anzahl_s;
+	virtual void OnOK();
 };

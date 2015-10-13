@@ -48,6 +48,9 @@
     <ClInclude Include="NewName.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="LoeschWarnung.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Demo.cpp">
@@ -72,6 +75,9 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="NewName.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="LoeschWarnung.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

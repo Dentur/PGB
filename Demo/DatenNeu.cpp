@@ -5,6 +5,7 @@
 #include "Demo.h"
 #include "DatenNeu.h"
 #include "afxdialogex.h"
+#include "LoeschWarnung.h"
 
 
 // DatenNeu-Dialogfeld
@@ -40,3 +41,19 @@ END_MESSAGE_MAP()
 
 
 // DatenNeu-Meldungshandler
+
+
+void DatenNeu::OnOK()
+{
+	// TODO: Fügen Sie hier Ihren spezialisierten Code ein, und/oder rufen Sie die Basisklasse auf.
+	if (GetParentFrame()->GetActiveDocument()->IsModified())
+	{
+		LoeschWarnung lw;
+		if (lw.DoModal() != IDOK)
+		{
+			return;
+		}
+	}
+
+	CDialog::OnOK();
+}
