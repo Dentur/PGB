@@ -383,6 +383,46 @@ END
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 #pragma code_page(1252)
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DATENNEU DIALOGEX 0, 0, 205, 177
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Neue Datei"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,156,88,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,102,156,96,14
+    EDITTEXT        IDC_DATENNAME,73,20,125,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_ANZAHL_S,93,58,105,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_ANZAHL_Z,94,39,104,14,ES_AUTOHSCROLL
+    LTEXT           "Name:",IDC_STATIC,7,22,22,8
+    LTEXT           "Anzahl Datenreihen:",IDC_STATIC,7,41,66,8
+    LTEXT           "Anzahl pro Datenrreihe:",IDC_STATIC,7,59,78,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_DATENNEU, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 198
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 170
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
 //
