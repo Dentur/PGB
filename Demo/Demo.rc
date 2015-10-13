@@ -82,13 +82,17 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "&Beenden",                    ID_APP_EXIT
     END
-    POPUP "&Bearbeiten"
+    POPUP "Eingabe"
     BEGIN
-        MENUITEM "&Rückgängig\tStrg+Z",         ID_EDIT_UNDO
+        MENUITEM "Name",                        ID_EINGABE_NAME
+        MENUITEM "Datenreihe",                  ID_EINGABE_DATENREIHE
+        MENUITEM "Daten",                       ID_EINGABE_DATEN
         MENUITEM SEPARATOR
-        MENUITEM "&Ausschneiden\tStrg+X",       ID_EDIT_CUT
-        MENUITEM "&Kopieren\tStrg+C",           ID_EDIT_COPY
-        MENUITEM "&Einfügen\tStrg+V",           ID_EDIT_PASTE
+        MENUITEM "Testdatein",                  ID_EINGABE_TESTDATEIN
+    END
+    POPUP "Ausgabe"
+    BEGIN
+        MENUITEM "Datenreihe",                  ID_AUSGABE_DATENREIHE
     END
     POPUP "&Ansicht"
     BEGIN

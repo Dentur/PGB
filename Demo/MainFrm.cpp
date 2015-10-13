@@ -19,6 +19,18 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_WM_CREATE()
 	ON_COMMAND_RANGE(ID_VIEW_APPLOOK_WIN_2000, ID_VIEW_APPLOOK_WINDOWS_7, &CMainFrame::OnApplicationLook)
 	ON_UPDATE_COMMAND_UI_RANGE(ID_VIEW_APPLOOK_WIN_2000, ID_VIEW_APPLOOK_WINDOWS_7, &CMainFrame::OnUpdateApplicationLook)
+	ON_COMMAND(ID_EINGABE_TESTDATEIN, &CMainFrame::OnEingabeTestdatein)
+	ON_UPDATE_COMMAND_UI(ID_EINGABE_TESTDATEIN, &CMainFrame::OnUpdateEingabeTestdatein)
+	ON_COMMAND(ID_EINGABE_NAME, &CMainFrame::OnEingabeName)
+	ON_UPDATE_COMMAND_UI(ID_EINGABE_NAME, &CMainFrame::OnUpdateEingabeName)
+	ON_COMMAND(ID_EINGABE_DATENREIHE, &CMainFrame::OnEingabeDatenreihe)
+	ON_UPDATE_COMMAND_UI(ID_EINGABE_DATENREIHE, &CMainFrame::OnUpdateEingabeDatenreihe)
+	ON_COMMAND(ID_EINGABE_DATEN, &CMainFrame::OnEingabeDaten)
+	ON_UPDATE_COMMAND_UI(ID_EINGABE_DATEN, &CMainFrame::OnUpdateEingabeDaten)
+	ON_COMMAND(ID_FILE_NEW, &CMainFrame::OnFileNew)
+	ON_UPDATE_COMMAND_UI(ID_FILE_NEW, &CMainFrame::OnUpdateFileNew)
+	ON_COMMAND(ID_AUSGABE_DATENREIHE, &CMainFrame::OnAusgabeDatenreihe)
+	ON_UPDATE_COMMAND_UI(ID_AUSGABE_DATENREIHE, &CMainFrame::OnUpdateAusgabeDatenreihe)
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -169,3 +181,75 @@ void CMainFrame::OnUpdateApplicationLook(CCmdUI* pCmdUI)
 	pCmdUI->SetRadio(theApp.m_nAppLook == pCmdUI->m_nID);
 }
 
+
+
+void CMainFrame::OnEingabeTestdatein()
+{
+	// TODO: Fügen Sie hier Ihren Befehlsbehandlungscode ein.
+}
+
+
+void CMainFrame::OnUpdateEingabeTestdatein(CCmdUI *pCmdUI)
+{
+	// TODO: Fügen Sie hier Ihren Befehlsaktualisierungs-UI-Behandlungscode ein.
+}
+
+
+void CMainFrame::OnEingabeName()
+{
+	// TODO: Fügen Sie hier Ihren Befehlsbehandlungscode ein.
+}
+
+
+void CMainFrame::OnUpdateEingabeName(CCmdUI *pCmdUI)
+{
+	// TODO: Fügen Sie hier Ihren Befehlsaktualisierungs-UI-Behandlungscode ein.
+}
+
+
+void CMainFrame::OnEingabeDatenreihe()
+{
+	// TODO: Fügen Sie hier Ihren Befehlsbehandlungscode ein.
+}
+
+
+void CMainFrame::OnUpdateEingabeDatenreihe(CCmdUI *pCmdUI)
+{
+	// TODO: Fügen Sie hier Ihren Befehlsaktualisierungs-UI-Behandlungscode ein.
+}
+
+
+void CMainFrame::OnEingabeDaten()
+{
+	// TODO: Fügen Sie hier Ihren Befehlsbehandlungscode ein.
+}
+
+
+void CMainFrame::OnUpdateEingabeDaten(CCmdUI *pCmdUI)
+{
+	// TODO: Fügen Sie hier Ihren Befehlsaktualisierungs-UI-Behandlungscode ein.
+}
+
+
+void CMainFrame::OnFileNew()
+{
+	// TODO: Fügen Sie hier Ihren Befehlsbehandlungscode ein.
+}
+
+
+void CMainFrame::OnUpdateFileNew(CCmdUI *pCmdUI)
+{
+	// TODO: Fügen Sie hier Ihren Befehlsaktualisierungs-UI-Behandlungscode ein.
+}
+
+
+void CMainFrame::OnAusgabeDatenreihe()
+{
+	// TODO: Fügen Sie hier Ihren Befehlsbehandlungscode ein.
+}
+
+
+void CMainFrame::OnUpdateAusgabeDatenreihe(CCmdUI *pCmdUI)
+{
+	// TODO: Fügen Sie hier Ihren Befehlsaktualisierungs-UI-Behandlungscode ein.
+}

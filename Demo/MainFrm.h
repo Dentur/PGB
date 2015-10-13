@@ -40,6 +40,19 @@ protected:
 	afx_msg void OnUpdateApplicationLook(CCmdUI* pCmdUI);
 	DECLARE_MESSAGE_MAP()
 
+public:
+	afx_msg void OnEingabeTestdatein();
+	afx_msg void OnUpdateEingabeTestdatein(CCmdUI *pCmdUI);
+	afx_msg void OnEingabeName();
+	afx_msg void OnUpdateEingabeName(CCmdUI *pCmdUI);
+	afx_msg void OnEingabeDatenreihe();
+	afx_msg void OnUpdateEingabeDatenreihe(CCmdUI *pCmdUI);
+	afx_msg void OnEingabeDaten();
+	afx_msg void OnUpdateEingabeDaten(CCmdUI *pCmdUI);
+	afx_msg void OnFileNew();
+	afx_msg void OnUpdateFileNew(CCmdUI *pCmdUI);
+	afx_msg void OnAusgabeDatenreihe();
+	afx_msg void OnUpdateAusgabeDatenreihe(CCmdUI *pCmdUI);
 };
 
 
