@@ -23,7 +23,6 @@
 #define IDD_DATENNEU                    310
 #define IDD_NAME                        311
 #define IDD_LOESCHWARNUNG               312
-#define IDD_DIALOG1                     313
 #define IDD_TESTDATEN                   313
 #define ID_EINGABE_TESTDATEN            1005
 #define IDC_DATENNAME                   1006
@@ -36,6 +35,7 @@
 #define IDC_MINIMUM                     1013
 #define IDC_MAXIMUM                     1014
 #define IDC_ABWEICHUNG                  1015
+#define IDC_MINIMUM2                    1016
 #define ID_EINGABE_NAME                 32771
 #define ID_EINGABE_DATENREIHE           32772
 #define ID_EINGABE_DATEN                32773
