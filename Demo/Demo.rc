@@ -88,7 +88,7 @@ BEGIN
         MENUITEM "Datenreihe",                  ID_EINGABE_DATENREIHE
         MENUITEM "Daten",                       ID_EINGABE_DATEN
         MENUITEM SEPARATOR
-        MENUITEM "Testdatein",                  ID_EINGABE_TESTDATEIN
+        MENUITEM "Testdatein",                  ID_EINGABE_TESTDATEN
     END
     POPUP "Ausgabe"
     BEGIN
@@ -114,6 +114,7 @@ BEGIN
                 MENUITEM "Stil '&Aqua'",                ID_VIEW_APPLOOK_OFF_2007_AQUA
             END
         END
+        MENUITEM "Eingabeleiste",               ID_ANSICHT_EINGABELEISTE
     END
     POPUP "&Hilfe"
     BEGIN
@@ -172,6 +173,16 @@ BEGIN
     LTEXT           "Created by: Sebastian Venhuis",IDC_STATIC,49,17,99,9
 END
 
+IDD_DIALOGBAR_EIN DIALOGEX 0, 0, 229, 16
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x0
+BEGIN
+    PUSHBUTTON      "Name",ID_EINGABE_NAME,1,2,50,14
+    PUSHBUTTON      "Datenreihe",ID_EINGABE_DATENREIHE,53,1,50,14
+    PUSHBUTTON      "Daten",ID_EINGABE_DATEN,106,1,50,14
+    PUSHBUTTON      "Testdaten",ID_EINGABE_TESTDATEN,157,2,50,14
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -226,6 +237,11 @@ BEGIN
         RIGHTMARGIN, 164
         TOPMARGIN, 7
         BOTTOMMARGIN, 61
+    END
+
+    IDD_DIALOGBAR_EIN, DIALOG
+    BEGIN
+        RIGHTMARGIN, 207
     END
 END
 #endif    // APSTUDIO_INVOKED

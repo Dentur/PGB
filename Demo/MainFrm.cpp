@@ -4,6 +4,7 @@
 
 #include "stdafx.h"
 #include "Demo.h"
+#include "Daten.h"
 
 #include "MainFrm.h"
 
@@ -31,6 +32,10 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_UPDATE_COMMAND_UI(ID_FILE_NEW, &CMainFrame::OnUpdateFileNew)
 	ON_COMMAND(ID_AUSGABE_DATENREIHE, &CMainFrame::OnAusgabeDatenreihe)
 	ON_UPDATE_COMMAND_UI(ID_AUSGABE_DATENREIHE, &CMainFrame::OnUpdateAusgabeDatenreihe)
+	ON_COMMAND(ID_EINGABE_TESTDATEN, &CMainFrame::OnEingabeTestdaten)
+	ON_UPDATE_COMMAND_UI(ID_EINGABE_TESTDATEN, &CMainFrame::OnUpdateEingabeTestdaten)
+	ON_COMMAND(ID_ANSICHT_EINGABELEISTE, &CMainFrame::OnAnsichtEingabeleiste)
+	ON_UPDATE_COMMAND_UI(ID_ANSICHT_EINGABELEISTE, &CMainFrame::OnUpdateAnsichtEingabeleiste)
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -76,6 +81,10 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	EnableDocking(CBRS_ALIGN_ANY);
 	DockControlBar(&m_wndToolBar);
 
+	dialogbar_ein.Create(this, IDD_DIALOGBAR_EIN, CBRS_ALIGN_BOTTOM, AFX_IDW_CONTROLBAR_FIRST + 50);
+	dialogbar_ein.EnableDocking(CBRS_ALIGN_ANY);
+	dialogbar_ein.SetWindowText("Eingaben");
+	DockControlBar(&dialogbar_ein, AFX_IDW_DOCKBAR_BOTTOM);
 
 	return 0;
 }
@@ -245,11 +254,36 @@ void CMainFrame::OnUpdateFileNew(CCmdUI *pCmdUI)
 
 void CMainFrame::OnAusgabeDatenreihe()
 {
-	// TODO: Fügen Sie hier Ihren Befehlsbehandlungscode ein.
+	AfxMessageBox("Menü Augabe->Datenreihe noch nicht implementiert!", MB_OK | MB_ICONINFORMATION, 0);
 }
 
 
 void CMainFrame::OnUpdateAusgabeDatenreihe(CCmdUI *pCmdUI)
 {
+	pCmdUI->Enable(DemoData.get_anz_z());
+}
+
+
+void CMainFrame::OnEingabeTestdaten()
+{
+	// TODO: Fügen Sie hier Ihren Befehlsbehandlungscode ein.
+}
+
+
+void CMainFrame::OnUpdateEingabeTestdaten(CCmdUI *pCmdUI)
+{
 	// TODO: Fügen Sie hier Ihren Befehlsaktualisierungs-UI-Behandlungscode ein.
+}
+
+
+void CMainFrame::OnAnsichtEingabeleiste()
+{
+	ShowControlBar(&dialogbar_ein, !dialogbar_ein.IsWindowVisible(), TRUE);
+}
+
+
+void CMainFrame::OnUpdateAnsichtEingabeleiste(CCmdUI *pCmdUI)
+{
+	pCmdUI->Enable(TRUE);
+	pCmdUI->SetCheck(dialogbar_ein.IsWindowVisible());
 }

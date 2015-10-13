@@ -11,6 +11,8 @@ protected: // Nur aus Serialisierung erstellen
 	CMainFrame();
 	DECLARE_DYNCREATE(CMainFrame)
 
+	CDialogBar dialogbar_ein;
+
 // Attribute
 public:
 
@@ -53,6 +55,10 @@ public:
 	afx_msg void OnUpdateFileNew(CCmdUI *pCmdUI);
 	afx_msg void OnAusgabeDatenreihe();
 	afx_msg void OnUpdateAusgabeDatenreihe(CCmdUI *pCmdUI);
+	afx_msg void OnEingabeTestdaten();
+	afx_msg void OnUpdateEingabeTestdaten(CCmdUI *pCmdUI);
+	afx_msg void OnAnsichtEingabeleiste();
+	afx_msg void OnUpdateAnsichtEingabeleiste(CCmdUI *pCmdUI);
 };
 
 
