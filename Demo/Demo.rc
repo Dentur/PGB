@@ -403,6 +403,17 @@ BEGIN
     LTEXT           "Anzahl pro Datenrreihe:",IDC_STATIC,7,59,78,8
 END
 
+IDD_NAME DIALOGEX 0, 0, 139, 55
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Name"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,34,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,82,34,50,14
+    EDITTEXT        IDC_NAME,31,15,101,14,ES_AUTOHSCROLL
+    LTEXT           "Name:",IDC_STATIC,7,17,22,8
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -418,6 +429,14 @@ BEGIN
         RIGHTMARGIN, 198
         TOPMARGIN, 7
         BOTTOMMARGIN, 94
+    END
+
+    IDD_NAME, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 132
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
     END
 END
 #endif    // APSTUDIO_INVOKED

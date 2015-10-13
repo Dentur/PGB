@@ -21,11 +21,13 @@
 #define ID_VIEW_APPLOOK_OFF_2007_AQUA   218
 #define ID_VIEW_APPLOOK_WINDOWS_7       219
 #define IDD_DATENNEU                    310
+#define IDD_DIALOG1                     311
+#define IDD_NAME                        311
 #define ID_EINGABE_TESTDATEN            1005
 #define IDC_DATENNAME                   1006
 #define IDC_ANZAHL_S                    1007
 #define IDC_ANZAHL_Z                    1008
-#define IDC_ANZAHL_Z1                   1008
+#define IDC_NAME                        1009
 #define ID_EINGABE_NAME                 32771
 #define ID_EINGABE_DATENREIHE           32772
 #define ID_EINGABE_DATEN                32773
@@ -40,9 +42,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        311
+#define _APS_NEXT_RESOURCE_VALUE        312
 #define _APS_NEXT_COMMAND_VALUE         32780
-#define _APS_NEXT_CONTROL_VALUE         1009
+#define _APS_NEXT_CONTROL_VALUE         1010
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif

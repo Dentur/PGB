@@ -6,6 +6,7 @@
 #include "Demo.h"
 #include "Daten.h"
 #include "DatenNeu.h"
+#include "NewName.h"
 
 #include "MainFrm.h"
 
@@ -207,7 +208,13 @@ void CMainFrame::OnUpdateEingabeTestdatein(CCmdUI *pCmdUI)
 
 void CMainFrame::OnEingabeName()
 {
-	// TODO: Fügen Sie hier Ihren Befehlsbehandlungscode ein.
+	NewName nn;
+	nn.name = DemoData.get_name();
+	if (nn.DoModal() == IDOK)
+	{
+		DemoData.set_name(nn.name);
+		GetActiveDocument()->SetModifiedFlag();
+	}
 }
 
 
