@@ -102,6 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Daten.h" />
+    <ClInclude Include="DatenNeu.h" />
     <ClInclude Include="Demo.h" />
     <ClInclude Include="DemoDoc.h" />
     <ClInclude Include="DemoView.h" />
@@ -112,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Daten.cpp" />
+    <ClCompile Include="DatenNeu.cpp" />
     <ClCompile Include="Demo.cpp" />
     <ClCompile Include="DemoDoc.cpp" />
     <ClCompile Include="DemoView.cpp" />
