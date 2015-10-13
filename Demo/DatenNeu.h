@@ -18,4 +18,8 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV-Unterstützung
 
 	DECLARE_MESSAGE_MAP()
+public:
+	CString datenname;
+	int anzahl_z;
+	int anzahl_s;
 };
