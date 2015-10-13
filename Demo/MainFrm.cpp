@@ -7,7 +7,7 @@
 #include "Daten.h"
 #include "DatenNeu.h"
 #include "NewName.h"
-
+#include "TestdatenGenerieren.h"
 #include "MainFrm.h"
 
 #ifdef _DEBUG
@@ -284,7 +284,11 @@ void CMainFrame::OnUpdateAusgabeDatenreihe(CCmdUI *pCmdUI)
 
 void CMainFrame::OnEingabeTestdaten()
 {
-	// TODO: Fügen Sie hier Ihren Befehlsbehandlungscode ein.
+	TestdatenGenerieren tg;
+	if (tg.DoModal())
+	{
+		DemoData.testdaten(tg.minimum, tg.maximum, tg.maxAbweichung, tg.namen, tg.farben, tg.werte);
+	}
 }
 
 

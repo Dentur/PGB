@@ -112,6 +112,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TestdatenGenerieren.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Daten.cpp" />
@@ -126,6 +127,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TestdatenGenerieren.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Demo.reg" />
