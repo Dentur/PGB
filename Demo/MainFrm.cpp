@@ -5,6 +5,7 @@
 #include "stdafx.h"
 #include "Demo.h"
 #include "Daten.h"
+#include "DatenNeu.h"
 
 #include "MainFrm.h"
 
@@ -242,13 +243,14 @@ void CMainFrame::OnUpdateEingabeDaten(CCmdUI *pCmdUI)
 
 void CMainFrame::OnFileNew()
 {
-	// TODO: Fügen Sie hier Ihren Befehlsbehandlungscode ein.
+	DatenNeu dn;
+	dn.DoModal();
 }
 
 
 void CMainFrame::OnUpdateFileNew(CCmdUI *pCmdUI)
 {
-	// TODO: Fügen Sie hier Ihren Befehlsaktualisierungs-UI-Behandlungscode ein.
+	pCmdUI->Enable(TRUE);
 }
 
 
