@@ -44,9 +44,9 @@ BOOL CDemoDoc::OnNewDocument()
 	if (!CDocument::OnNewDocument())
 		return FALSE;
 
-	DemoData.init(10, 20, CString("Testdaten"));
-	DemoData.testdaten(-10, 10, 2);
-	SetModifiedFlag();
+	//DemoData.init(10, 20, CString("Testdaten"));
+	//DemoData.testdaten(-10, 10, 2);
+	//SetModifiedFlag();
 
 	return TRUE;
 }
