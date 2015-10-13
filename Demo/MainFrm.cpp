@@ -244,7 +244,16 @@ void CMainFrame::OnUpdateEingabeDaten(CCmdUI *pCmdUI)
 void CMainFrame::OnFileNew()
 {
 	DatenNeu dn;
-	dn.DoModal();
+
+	dn.datenname = DemoData.get_name();
+	dn.anzahl_z = DemoData.get_anz_z();
+	dn.anzahl_s = DemoData.get_anz_s();
+	if (dn.DoModal() == IDOK)
+	{
+		DemoData.init(dn.anzahl_z, dn.anzahl_s, dn.datenname);
+		GetActiveDocument()->SetModifiedFlag();
+	}
+
 }
 
 
