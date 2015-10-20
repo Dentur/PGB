@@ -443,6 +443,22 @@ BEGIN
     LTEXT           "Maximale Abweichung",IDC_STATIC,7,75,71,8
 END
 
+IDD_EINDATEN DIALOGEX 0, 0, 207, 70
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dateneingabe"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_WERT,53,48,40,14,ES_AUTOHSCROLL
+    LTEXT           "Datenreihe:",IDC_STATIC,7,20,39,8
+    LTEXT           "Datenfeld:",IDC_STATIC,7,35,35,8
+    LTEXT           "Wert:",IDC_STATIC,7,51,20,8
+    COMBOBOX        IDC_AUSWAHL,53,16,123,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_NUMBER,53,31,27,14,ES_AUTOHSCROLL | ES_READONLY
+    SCROLLBAR       IDC_SCROLL,85,32,91,11
+    PUSHBUTTON      "Löschen",IDC_LOESCHEN,150,49,50,14
+    PUSHBUTTON      "Speichern",IDC_SPEICHERN,96,49,50,14
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -482,6 +498,14 @@ BEGIN
         RIGHTMARGIN, 142
         TOPMARGIN, 7
         BOTTOMMARGIN, 111
+    END
+
+    IDD_EINDATEN, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 200
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 63
     END
 END
 #endif    // APSTUDIO_INVOKED

@@ -106,6 +106,7 @@
     <ClInclude Include="Demo.h" />
     <ClInclude Include="DemoDoc.h" />
     <ClInclude Include="DemoView.h" />
+    <ClInclude Include="EinDaten.h" />
     <ClInclude Include="LoeschWarnung.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="NewName.h" />
@@ -120,6 +121,7 @@
     <ClCompile Include="Demo.cpp" />
     <ClCompile Include="DemoDoc.cpp" />
     <ClCompile Include="DemoView.cpp" />
+    <ClCompile Include="EinDaten.cpp" />
     <ClCompile Include="LoeschWarnung.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="NewName.cpp" />
