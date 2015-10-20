@@ -5,6 +5,7 @@
 #include "Demo.h"
 #include "AusReihe.h"
 #include "afxdialogex.h"
+#include "Daten.h"
 
 
 // AusReihe-Dialogfeld
@@ -18,7 +19,21 @@ AusReihe::AusReihe(CWnd* pParent /*=NULL*/)
 	, m_xraster(FALSE)
 	, m_yraster(FALSE)
 {
+	int i;
 
+	Create(AusReihe::IDD, pParent);
+
+	for (i = 0; i < DemoData.get_anz_z(); i++)
+		m_reihe.InsertString(i, DemoData.get_rname(i));
+	m_selection = 0;
+	m_xraster = TRUE;
+	m_yraster = TRUE;
+	m_darstellung = 0;
+
+	UpdateData(FALSE);
+	SetWindowText("Datenreihe: " + DemoData.get_name());
+
+	ShowWindow(SW_SHOW);
 }
 
 AusReihe::~AusReihe()
@@ -37,7 +52,17 @@ void AusReihe::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(AusReihe, CDialog)
+	ON_WM_CLOSE()
 END_MESSAGE_MAP()
 
 
 // AusReihe-Meldungshandler
+
+
+void AusReihe::OnClose()
+{
+	DestroyWindow();
+	delete this;
+
+	CDialog::OnClose();
+}

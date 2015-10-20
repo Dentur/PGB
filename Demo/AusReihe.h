@@ -24,4 +24,5 @@ public:
 	CComboBox m_reihe;
 	BOOL m_xraster;
 	BOOL m_yraster;
+	afx_msg void OnClose();
 };

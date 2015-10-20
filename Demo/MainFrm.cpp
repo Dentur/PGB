@@ -11,6 +11,7 @@
 #include "MainFrm.h"
 #include "EinDaten.h"
 #include "EinReihe.h"
+#include "AusReihe.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -276,8 +277,10 @@ void CMainFrame::OnUpdateFileNew(CCmdUI *pCmdUI)
 
 void CMainFrame::OnAusgabeDatenreihe()
 {
-	AfxMessageBox("Menü Augabe->Datenreihe noch nicht implementiert!", MB_OK | MB_ICONINFORMATION, 0);
+	//AfxMessageBox("Menü Augabe->Datenreihe noch nicht implementiert!", MB_OK | MB_ICONINFORMATION, 0);
+	new AusReihe;
 }
+
 
 
 void CMainFrame::OnUpdateAusgabeDatenreihe(CCmdUI *pCmdUI)
