@@ -9,6 +9,7 @@
 #include "NewName.h"
 #include "TestdatenGenerieren.h"
 #include "MainFrm.h"
+#include "EinDaten.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -238,13 +239,14 @@ void CMainFrame::OnUpdateEingabeDatenreihe(CCmdUI *pCmdUI)
 
 void CMainFrame::OnEingabeDaten()
 {
-	// TODO: Fügen Sie hier Ihren Befehlsbehandlungscode ein.
+	EinDaten eDat = new EinDaten(this);
+	eDat.DoModal();
 }
 
 
 void CMainFrame::OnUpdateEingabeDaten(CCmdUI *pCmdUI)
 {
-	// TODO: Fügen Sie hier Ihren Befehlsaktualisierungs-UI-Behandlungscode ein.
+	pCmdUI->Enable(TRUE);
 }
 
 
