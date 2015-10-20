@@ -144,7 +144,7 @@ void EinDaten::OnBnClickedSpeichern()
 	if (DemoData.get_wert(auswahl, nummer - 1) != wert)
 	{
 		DemoData.set_wert(auswahl, nummer - 1, wert);
-		GetParentFrame()->GetActiveDocument()->SetModifiedFlag;
+		GetParentFrame()->GetActiveDocument()->SetModifiedFlag();
 	}
 	scroll_to(nummer + 1);
 	GotoDlgCtrl(GetDlgItem(IDC_WERT));
@@ -158,7 +158,7 @@ void EinDaten::OnBnClickedLoeschen()
 	if (DemoData.get_wert(auswahl, nummer - 1) != 0)
 	{
 		DemoData.set_wert(auswahl, nummer - 1, 0);
-		GetParentFrame()->GetActiveDocument()->SetModifiedFlag;
+		GetParentFrame()->GetActiveDocument()->SetModifiedFlag();
 	}
 	scroll_to(nummer + 1);
 	GotoDlgCtrl(GetDlgItem(IDC_WERT));
