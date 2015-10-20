@@ -459,6 +459,22 @@ BEGIN
     PUSHBUTTON      "Speichern",IDC_SPEICHERN,96,49,50,14
 END
 
+IDD_DATENREIHE DIALOGEX 0, 0, 167, 69
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Datenreihe bearbeiten"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_REIHE,49,15,56,14,ES_AUTOHSCROLL
+    LTEXT           "Datenreihe:",IDC_STATIC,7,18,39,8
+    LTEXT           "Name:",IDC_STATIC,7,33,22,8
+    LTEXT           "Farbe",IDC_STATIC,7,51,20,8
+    EDITTEXT        IDC_NAME,49,31,55,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "-",IDC_MINUS,109,15,21,14
+    PUSHBUTTON      "+",IDC_PLUS,133,15,21,14
+    PUSHBUTTON      "Speichern",IDC_SPEICHERN,110,31,50,14
+    PUSHBUTTON      "Ändern",IDC_ANDERN,110,47,50,14
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -506,6 +522,14 @@ BEGIN
         RIGHTMARGIN, 200
         TOPMARGIN, 7
         BOTTOMMARGIN, 63
+    END
+
+    IDD_DATENREIHE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 160
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 62
     END
 END
 #endif    // APSTUDIO_INVOKED

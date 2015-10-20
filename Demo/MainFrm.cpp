@@ -10,6 +10,7 @@
 #include "TestdatenGenerieren.h"
 #include "MainFrm.h"
 #include "EinDaten.h"
+#include "EinReihe.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -227,7 +228,8 @@ void CMainFrame::OnUpdateEingabeName(CCmdUI *pCmdUI)
 
 void CMainFrame::OnEingabeDatenreihe()
 {
-	// TODO: Fügen Sie hier Ihren Befehlsbehandlungscode ein.
+	EinReihe reihe = new EinReihe(this);
+	reihe.DoModal();
 }
 
 
