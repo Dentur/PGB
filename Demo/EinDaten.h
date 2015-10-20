@@ -29,4 +29,8 @@ public:
 	CScrollBar scrollbar;
 	int wert;
 	virtual BOOL OnInitDialog();
+	afx_msg void OnCbnSelchangeAuswahl();
+	afx_msg void OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
+	afx_msg void OnBnClickedSpeichern();
+	afx_msg void OnBnClickedLoeschen();
 };

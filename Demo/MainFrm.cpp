@@ -255,8 +255,8 @@ void CMainFrame::OnFileNew()
 	DatenNeu dn;
 
 	dn.datenname = DemoData.get_name();
-	dn.anzahl_z = DemoData.get_anz_z();
-	dn.anzahl_s = DemoData.get_anz_s();
+	dn.anzahl_z = 10;
+	dn.anzahl_s = 10;
 	if (dn.DoModal() == IDOK)
 	{
 		DemoData.init(dn.anzahl_z, dn.anzahl_s, dn.datenname);

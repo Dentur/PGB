@@ -37,6 +37,10 @@ void EinDaten::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(EinDaten, CDialog)
+	ON_CBN_SELCHANGE(IDC_AUSWAHL, &EinDaten::OnCbnSelchangeAuswahl)
+	ON_WM_HSCROLL()
+	ON_BN_CLICKED(IDC_SPEICHERN, &EinDaten::OnBnClickedSpeichern)
+	ON_BN_CLICKED(IDC_LOESCHEN, &EinDaten::OnBnClickedLoeschen)
 END_MESSAGE_MAP()
 
 
@@ -82,5 +86,81 @@ void EinDaten::scroll_to(int pos)
 
 	wert = DemoData.get_wert(auswahl, nummer - 1);
 
+	UpdateData(FALSE);
+}
+
+
+void EinDaten::OnCbnSelchangeAuswahl()
+{
+	UpdateData(TRUE);
+	wert = DemoData.get_wert(auswahl, nummer - 1);
+	UpdateData(FALSE);
+	GotoDlgCtrl(GetDlgItem(IDC_WERT));
+}
+
+
+void EinDaten::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
+{
+	UpdateData(TRUE);
+	if (pScrollBar == &scrollbar)
+	{
+		switch (nSBCode)
+		{
+		case SB_LEFT:
+			scroll_to(1);
+			break;
+		case SB_RIGHT:
+			scroll_to(DemoData.get_anz_s());
+			break;
+		case SB_LINELEFT:
+			scroll_to(nummer-1);
+			break;
+		case SB_LINERIGHT:
+			scroll_to(nummer+1);
+			break;
+		case SB_PAGELEFT:
+			scroll_to(nummer-5);
+			break;
+		case SB_PAGERIGHT:
+			scroll_to(nummer + 5);
+			break;
+		case SB_THUMBPOSITION:
+		case SB_THUMBTRACK:
+			scroll_to(nPos);
+			break;
+		case SB_ENDSCROLL:
+			break;
+		}
+	}
+
+	GotoDlgCtrl(GetDlgItem(IDC_WERT));
+	CDialog::OnHScroll(nSBCode, nPos, pScrollBar);
+}
+
+
+void EinDaten::OnBnClickedSpeichern()
+{
+	UpdateData(TRUE);
+	if (DemoData.get_wert(auswahl, nummer - 1) != wert)
+	{
+		DemoData.set_wert(auswahl, nummer - 1, wert);
+		GetParentFrame()->GetActiveDocument()->SetModifiedFlag;
+	}
+	scroll_to(nummer + 1);
+	GotoDlgCtrl(GetDlgItem(IDC_WERT));
+	UpdateData(FALSE);
+}
+
+
+void EinDaten::OnBnClickedLoeschen()
+{
+	UpdateData(TRUE);
+	if (DemoData.get_wert(auswahl, nummer - 1) != 0)
+	{
+		DemoData.set_wert(auswahl, nummer - 1, 0);
+		GetParentFrame()->GetActiveDocument()->SetModifiedFlag;
+	}
+	scroll_to(nummer + 1);
+	GotoDlgCtrl(GetDlgItem(IDC_WERT));
 	UpdateData(FALSE);
 }
