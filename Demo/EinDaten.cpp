@@ -15,7 +15,7 @@ IMPLEMENT_DYNAMIC(EinDaten, CDialog)
 EinDaten::EinDaten(CWnd* pParent /*=NULL*/)
 	: CDialog(EinDaten::IDD, pParent)
 	, auswahl(0)
-	, nummrt(0)
+	, nummer(0)
 	, wert(0)
 {
 
@@ -30,7 +30,7 @@ void EinDaten::DoDataExchange(CDataExchange* pDX)
 	CDialog::DoDataExchange(pDX);
 	DDX_CBIndex(pDX, IDC_AUSWAHL, auswahl);
 	DDX_Control(pDX, IDC_AUSWAHL, combobox);
-	DDX_Text(pDX, IDC_NUMBER, nummrt);
+	DDX_Text(pDX, IDC_NUMBER, nummer);
 	DDX_Control(pDX, IDC_SCROLL, scrollbar);
 	DDX_Text(pDX, IDC_WERT, wert);
 }
@@ -52,8 +52,35 @@ BOOL EinDaten::OnInitDialog()
 		combobox.InsertString(index, DemoData.get_rname(index));
 	}
 	auswahl = 0;
+
+	scrollbar.SetScrollRange(1, DemoData.get_anz_s());
+	scroll_to(1);
+
 	UpdateData(FALSE);
+
+	GotoDlgCtrl(GetDlgItem(IDC_WERT));
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// AUSNAHME: OCX-Eigenschaftenseite muss FALSE zurückgeben.
+}
+
+
+void EinDaten::scroll_to(int pos)
+{
+	if (pos < 1)
+	{
+		pos = 1;
+	}
+	if (pos>DemoData.get_anz_s())
+	{
+		pos = DemoData.get_anz_s();
+	}
+
+	nummer = pos;
+
+	scrollbar.SetScrollPos( nummer);
+
+	wert = DemoData.get_wert(auswahl, nummer - 1);
+
+	UpdateData(FALSE);
 }

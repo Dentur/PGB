@@ -18,10 +18,14 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV-Unterstützung
 
 	DECLARE_MESSAGE_MAP()
+
+private:
+	void scroll_to(int pos);
+
 public:
 	int auswahl;
 	CComboBox combobox;
-	int nummrt;
+	int nummer;
 	CScrollBar scrollbar;
 	int wert;
 	virtual BOOL OnInitDialog();
