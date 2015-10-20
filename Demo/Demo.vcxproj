@@ -101,6 +101,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AusReihe.h" />
     <ClInclude Include="Daten.h" />
     <ClInclude Include="DatenNeu.h" />
     <ClInclude Include="Demo.h" />
@@ -117,6 +118,7 @@
     <ClInclude Include="TestdatenGenerieren.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AusReihe.cpp" />
     <ClCompile Include="Daten.cpp" />
     <ClCompile Include="DatenNeu.cpp" />
     <ClCompile Include="Demo.cpp" />
