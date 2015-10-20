@@ -5,6 +5,7 @@
 #include "Demo.h"
 #include "EinDaten.h"
 #include "afxdialogex.h"
+#include "Daten.h"
 
 
 // EinDaten-Dialogfeld
@@ -40,3 +41,19 @@ END_MESSAGE_MAP()
 
 
 // EinDaten-Meldungshandler
+
+
+BOOL EinDaten::OnInitDialog()
+{
+	CDialog::OnInitDialog();
+
+	for (int index = 0; index < DemoData.get_anz_z(); index++)
+	{
+		combobox.InsertString(index, DemoData.get_rname(index));
+	}
+	auswahl = 0;
+	UpdateData(FALSE);
+
+	return TRUE;  // return TRUE unless you set the focus to a control
+	// AUSNAHME: OCX-Eigenschaftenseite muss FALSE zurückgeben.
+}

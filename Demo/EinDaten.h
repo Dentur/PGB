@@ -24,4 +24,5 @@ public:
 	int nummrt;
 	CScrollBar scrollbar;
 	int wert;
+	virtual BOOL OnInitDialog();
 };
