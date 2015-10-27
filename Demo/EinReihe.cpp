@@ -6,6 +6,7 @@
 #include "EinReihe.h"
 #include "afxdialogex.h"
 #include "Daten.h"
+#include "draw.h"
 
 
 // EinReihe-Dialogfeld
@@ -118,5 +119,8 @@ void EinReihe::OnBnClickedAndern()
 	{
 		DemoData.set_farbe(reihe - 1, cd.GetColor());
 		GetParentFrame()->GetActiveDocument()->SetModifiedFlag();
+
+		stdbrush.set(reihe-1);
+		stdpen.set(reihe-1);
 	}
 }

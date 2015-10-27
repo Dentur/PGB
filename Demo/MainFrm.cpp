@@ -12,6 +12,7 @@
 #include "EinDaten.h"
 #include "EinReihe.h"
 #include "AusReihe.h"
+#include "draw.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -199,7 +200,7 @@ void CMainFrame::OnUpdateApplicationLook(CCmdUI* pCmdUI)
 
 void CMainFrame::OnEingabeTestdatein()
 {
-	// TODO: Fügen Sie hier Ihren Befehlsbehandlungscode ein.
+		
 }
 
 
@@ -264,6 +265,9 @@ void CMainFrame::OnFileNew()
 	{
 		DemoData.init(dn.anzahl_z, dn.anzahl_s, dn.datenname);
 		GetActiveDocument()->SetModifiedFlag();
+
+		stdbrush.setall();
+		stdpen.setall();
 	}
 
 }
@@ -279,6 +283,7 @@ void CMainFrame::OnAusgabeDatenreihe()
 {
 	//AfxMessageBox("Menü Augabe->Datenreihe noch nicht implementiert!", MB_OK | MB_ICONINFORMATION, 0);
 	new AusReihe;
+
 }
 
 
@@ -303,6 +308,9 @@ void CMainFrame::OnEingabeTestdaten()
 		DemoData.testdaten(tg.minimum, tg.maximum, tg.maxAbweichung, tg.namen, tg.farben, tg.werte);
 		GetActiveDocument()->SetModifiedFlag();
 	}
+
+	stdbrush.setall();
+	stdpen.setall();
 }
 
 
