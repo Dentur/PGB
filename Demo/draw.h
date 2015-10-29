@@ -35,6 +35,20 @@ public:
 	void setall();
 };
 
+class fonts
+{
+public:
+	CFont norm;
+	CFont bold;
+	CFont tiny;
+	CFont medium;
+	CFont big;
+	fonts();
+	~fonts();
+};
+
+
+
 extern brushes stdbrush;
 extern pens stdpen;
-
+extern fonts stdfont;

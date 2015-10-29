@@ -16,8 +16,9 @@ public:
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV-Unterstützung
-
 	DECLARE_MESSAGE_MAP()
+
+	CRect rahmen;
 public:
 	int m_darstellung;
 	int m_selection;
@@ -25,4 +26,12 @@ public:
 	BOOL m_xraster;
 	BOOL m_yraster;
 	afx_msg void OnClose();
+	afx_msg void OnPaint();
+	afx_msg void OnBnClickedLinien();
+	afx_msg void OnBnClickedSaeulen();
+	afx_msg void OnCbnSelchangeReihe();
+	afx_msg void OnBnClickedXraster();
+	afx_msg void OnBnClickedYraster();
 };
+
+CPoint scalePoint(CPoint p, CSize s1, CSize s2);

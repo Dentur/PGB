@@ -87,3 +87,24 @@ void pens::setall()
 }
 
 pens stdpen;
+
+fonts::fonts()
+{
+	norm.CreateFont(-12, 0, 0, 0, FW_NORMAL, 0, 0, 0, 0, 0, 0, 0, 0, "Helvetica");
+	bold.CreateFont(-12, 0, 0, 0, FW_BOLD, 0, 0, 0, 0, 0, 0, 0, 0, "Helvetica");
+	tiny.CreateFont(-9, 0, 0, 0, FW_NORMAL, 0, 0, 0, 0, 0, 0, 0, 0, "Helvetica");
+	medium.CreateFont(-16, 0, 0, 0, FW_BOLD, 0, 0, 0, 0, 0, 0, 0, 0, "Helvetica");
+	big.CreateFont(-32, 0, 0, 0, FW_BOLD, 0, 0, 0, 0, 0, 0, 0, 0, "Helvetica");
+}
+
+fonts::~fonts()
+{
+	norm.DeleteObject();
+	bold.DeleteObject();
+	tiny.DeleteObject();
+	medium.DeleteObject();
+	big.DeleteObject();
+
+}
+
+fonts stdfont;
