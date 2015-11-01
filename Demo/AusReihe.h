@@ -32,6 +32,8 @@ public:
 	afx_msg void OnCbnSelchangeReihe();
 	afx_msg void OnBnClickedXraster();
 	afx_msg void OnBnClickedYraster();
+
+
+	int scalePoint(int p, CSize* s1, CSize* s2);
 };
 
-CPoint scalePoint(CPoint p, CSize s1, CSize s2);

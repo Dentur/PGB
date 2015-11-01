@@ -82,7 +82,7 @@ void AusReihe::OnClose()
 	DestroyWindow();
 	delete this;
 
-	CDialog::OnClose();
+	//CDialog::OnClose();
 }
 
 
@@ -116,10 +116,18 @@ void AusReihe::OnPaint()
 	}
 	if (m_darstellung == 0)
 	{
-		int r = ;
+		dc.SelectObject(&stdpen.black5);
+		dc.MoveTo(
+			scalePoint(0, &CSize(0, DemoData.get_anz_s()), &CSize(0, rahmen.Width()))+rahmen.left+paddingLeft,
+			rahmen.bottom - paddingBottom - scalePoint(DemoData.get_wert(m_selection, 0), &CSize(DemoData.minimum(m_selection), DemoData.maximum(m_selection)), &CSize(0, rahmen.Height()))
+			);
 		for (int index = 0; index < DemoData.get_anz_s(); index++)
 		{
-
+			int temp = scalePoint(index, &CSize(0, DemoData.get_anz_s()), &CSize(0, rahmen.Width())) + rahmen.left + paddingLeft;
+			dc.LineTo(
+				temp,
+				rahmen.bottom - paddingBottom - scalePoint(DemoData.get_wert(m_selection, index), &CSize(DemoData.minimum(m_selection), DemoData.maximum(m_selection)), &CSize(0, rahmen.Height()))
+				);
 		}
 	}
 	else
@@ -164,7 +172,7 @@ void AusReihe::OnBnClickedYraster()
 	UpdateWindow();
 }
 
-CPoint scalePoint(int p, CSize s1, CSize s2)
+int AusReihe::scalePoint(int p, CSize* s1, CSize* s2)
 {
-	return(p - s1.cx)*(s1.cy - s1.cx) / (s1.cy - s1.cx) + s1.cx;
+	return((p - s1->cx)*(s2->cy - s2->cx)) / (s1->cy - s1->cx) + s2->cx;
 }
