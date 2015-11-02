@@ -154,7 +154,13 @@ void AusReihe::OnPaint()
 	}
 	else
 	{
-		
+		for (int index = 0; index < DemoData.get_anz_s(); index++)
+		{
+			int loc = scalePoint(index, &CSize(0, DemoData.get_anz_s()), &CSize(0, rahmen.Width())) + rahmen.left + paddingLeft;
+			dc.SelectObject(&stdbrush.gray);
+			dc.SelectObject(&stdpen.black1);
+			dc.Rectangle(loc - 5, rahmen.bottom - paddingBottom + nullLine, loc + 5, rahmen.bottom - paddingBottom + nullLine - scalePoint(DemoData.get_wert(m_selection, index), &CSize(DemoData.minimum(m_selection), DemoData.maximum(m_selection)), &CSize(0, rahmen.Height() - paddingHeight)));
+		}
 	}
 	dc.SelectObject(oldPen);
 }
