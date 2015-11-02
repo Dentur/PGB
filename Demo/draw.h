@@ -26,6 +26,7 @@ public:
 	CPen black5;
 	CPen black7;
 	CPen gray1;
+	CPen gray3;
 	CPen pen[MAX_ZEILEN];
 	
 	pens();

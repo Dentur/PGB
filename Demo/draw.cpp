@@ -54,6 +54,7 @@ pens::pens()
 	black5.CreatePen(PS_SOLID, 5, RGB(0, 0, 0));
 	black7.CreatePen(PS_SOLID, 7, RGB(0, 0, 0));
 	gray1.CreatePen(PS_SOLID, 1, RGB(128, 128, 128));
+	gray3.CreatePen(PS_SOLID, 3, RGB(128, 128, 128));
 
 	for (int i = 0; i < MAX_ZEILEN; i++)
 		pen[i].CreatePen(PS_SOLID, 3, RGB(0, 0, 0));
@@ -68,6 +69,7 @@ pens::~pens()
 	black5.DeleteObject();
 	black7.DeleteObject();
 	gray1.DeleteObject();
+	gray3.DeleteObject();
 
 	for (int i = 0; i < MAX_ZEILEN; i++)
 		pen[i].DeleteObject();

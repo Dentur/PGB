@@ -114,20 +114,42 @@ void AusReihe::OnPaint()
 			dc.LineTo(rahmen.right - paddingRight, y);
 		}
 	}
+	//draw null line
+	dc.SelectObject(&stdpen.black2);
+	int nullLine = scalePoint(0, &CSize(DemoData.minimum(m_selection), DemoData.maximum(m_selection)), &CSize(0, rahmen.Height() - paddingHeight));
+	dc.MoveTo(rahmen.left + paddingLeft, rahmen.bottom - paddingBottom + nullLine);
+	dc.LineTo(rahmen.right - paddingRight, rahmen.bottom - paddingBottom + nullLine);
+
 	if (m_darstellung == 0)
 	{
-		dc.SelectObject(&stdpen.black5);
-		dc.MoveTo(
-			scalePoint(0, &CSize(0, DemoData.get_anz_s()), &CSize(0, rahmen.Width()))+rahmen.left+paddingLeft,
-			rahmen.bottom - paddingBottom - scalePoint(DemoData.get_wert(m_selection, 0), &CSize(DemoData.minimum(m_selection), DemoData.maximum(m_selection)), &CSize(0, rahmen.Height()))
+		CPoint oldP, newP;
+		oldP = CPoint(
+			scalePoint(0, &CSize(0, DemoData.get_anz_s()), &CSize(0, rahmen.Width())) + rahmen.left + paddingLeft,
+			rahmen.bottom - paddingBottom - scalePoint(DemoData.get_wert(m_selection, 0), &CSize(DemoData.minimum(m_selection), DemoData.maximum(m_selection)), &CSize(0, rahmen.Height() - paddingHeight))
 			);
+		dc.MoveTo(oldP);
 		for (int index = 0; index < DemoData.get_anz_s(); index++)
 		{
-			int temp = scalePoint(index, &CSize(0, DemoData.get_anz_s()), &CSize(0, rahmen.Width())) + rahmen.left + paddingLeft;
-			dc.LineTo(
-				temp,
-				rahmen.bottom - paddingBottom - scalePoint(DemoData.get_wert(m_selection, index), &CSize(DemoData.minimum(m_selection), DemoData.maximum(m_selection)), &CSize(0, rahmen.Height()))
+			dc.SelectObject(&stdpen.black5);
+			newP = CPoint(scalePoint(index, &CSize(0, DemoData.get_anz_s()), &CSize(0, rahmen.Width())) + rahmen.left + paddingLeft,
+				rahmen.bottom - paddingBottom - scalePoint(DemoData.get_wert(m_selection, index), &CSize(DemoData.minimum(m_selection), DemoData.maximum(m_selection)), &CSize(0, rahmen.Height() - paddingHeight))
 				);
+			dc.LineTo(newP);
+			dc.SelectObject(&stdpen.gray3);
+			dc.MoveTo(oldP);
+			dc.LineTo(newP);
+			oldP = newP;
+		}
+		//draw the points
+		for (int index = 0; index < DemoData.get_anz_s(); index++)
+		{
+			CPoint loc = CPoint(
+				scalePoint(index, &CSize(0, DemoData.get_anz_s()), &CSize(0, rahmen.Width())) + rahmen.left + paddingLeft,
+				rahmen.bottom - paddingBottom - scalePoint(DemoData.get_wert(m_selection, index), &CSize(DemoData.minimum(m_selection), DemoData.maximum(m_selection)), &CSize(0, rahmen.Height() - paddingHeight))
+				);
+			dc.SelectObject(&stdbrush.gray);
+			dc.SelectObject(&stdpen.black1);
+			dc.Ellipse(loc.x - 5, loc.y - 5, loc.x + 5, loc.y + 5);
 		}
 	}
 	else
