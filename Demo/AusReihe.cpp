@@ -114,25 +114,36 @@ void AusReihe::OnPaint()
 			dc.LineTo(rahmen.right - paddingRight, y);
 		}
 	}
+
+	CSize dataRangeHeight, dataRangeWidth, windowRangeHeight, windowRangeWidth;
+	dataRangeHeight = CSize(DemoData.minimum(m_selection), DemoData.maximum(m_selection));
+	dataRangeWidth = CSize(0, DemoData.get_anz_s());
+	//windowRangeHeight = CSize(rahmen.top + 1*paddingTop, rahmen.bottom - 1*paddingBottom);
+	windowRangeHeight = CSize(paddingTop, rahmen.Height()-paddingHeight);
+	windowRangeWidth = CSize(rahmen.left + paddingLeft, rahmen.right - 0*paddingRight);
 	//draw null line
 	dc.SelectObject(&stdpen.black2);
-	int nullLine = scalePoint(0, &CSize(DemoData.minimum(m_selection), DemoData.maximum(m_selection)), &CSize(0, rahmen.Height() - paddingHeight));
-	dc.MoveTo(rahmen.left + paddingLeft, rahmen.bottom - paddingBottom + nullLine);
-	dc.LineTo(rahmen.right - paddingRight, rahmen.bottom - paddingBottom + nullLine);
+	if ((DemoData.minimum(m_selection) < 0) && (DemoData.maximum(m_selection) > 0))
+	{
+		int nullLine = rahmen.bottom-scalePoint(0, &dataRangeHeight, &windowRangeHeight);
+		dc.MoveTo(rahmen.left + paddingLeft, nullLine);
+		dc.LineTo(rahmen.right - paddingRight, nullLine);
+	}
 
 	if (m_darstellung == 0)
 	{
 		CPoint oldP, newP;
 		oldP = CPoint(
-			scalePoint(0, &CSize(0, DemoData.get_anz_s()), &CSize(0, rahmen.Width())) + rahmen.left + paddingLeft,
-			rahmen.bottom - paddingBottom - scalePoint(DemoData.get_wert(m_selection, 0), &CSize(DemoData.minimum(m_selection), DemoData.maximum(m_selection)), &CSize(0, rahmen.Height() - paddingHeight))
+			scalePoint(0, &dataRangeWidth, &windowRangeWidth),
+			rahmen.bottom - scalePoint(DemoData.get_wert(m_selection, 0), &dataRangeHeight, &windowRangeHeight)
 			);
 		dc.MoveTo(oldP);
 		for (int index = 0; index < DemoData.get_anz_s(); index++)
 		{
 			dc.SelectObject(&stdpen.black5);
-			newP = CPoint(scalePoint(index, &CSize(0, DemoData.get_anz_s()), &CSize(0, rahmen.Width())) + rahmen.left + paddingLeft,
-				rahmen.bottom - paddingBottom - scalePoint(DemoData.get_wert(m_selection, index), &CSize(DemoData.minimum(m_selection), DemoData.maximum(m_selection)), &CSize(0, rahmen.Height() - paddingHeight))
+			newP = CPoint(
+				scalePoint(index, &dataRangeWidth, &windowRangeWidth),
+				rahmen.bottom -scalePoint(DemoData.get_wert(m_selection, index), &dataRangeHeight, &windowRangeHeight)
 				);
 			dc.LineTo(newP);
 			dc.SelectObject(&stdpen.gray3);
@@ -141,25 +152,27 @@ void AusReihe::OnPaint()
 			oldP = newP;
 		}
 		//draw the points
+
+		dc.SelectObject(&stdbrush.gray);
+		dc.SelectObject(&stdpen.black1);
 		for (int index = 0; index < DemoData.get_anz_s(); index++)
 		{
 			CPoint loc = CPoint(
-				scalePoint(index, &CSize(0, DemoData.get_anz_s()), &CSize(0, rahmen.Width())) + rahmen.left + paddingLeft,
-				rahmen.bottom - paddingBottom - scalePoint(DemoData.get_wert(m_selection, index), &CSize(DemoData.minimum(m_selection), DemoData.maximum(m_selection)), &CSize(0, rahmen.Height() - paddingHeight))
+				scalePoint(index, &dataRangeWidth, &windowRangeWidth),
+				rahmen.bottom - scalePoint(DemoData.get_wert(m_selection, index), &dataRangeHeight, &windowRangeHeight)
 				);
-			dc.SelectObject(&stdbrush.gray);
-			dc.SelectObject(&stdpen.black1);
 			dc.Ellipse(loc.x - 5, loc.y - 5, loc.x + 5, loc.y + 5);
 		}
 	}
 	else
 	{
+		dc.SelectObject(&stdbrush.gray);
+		dc.SelectObject(&stdpen.black1);
 		for (int index = 0; index < DemoData.get_anz_s(); index++)
 		{
-			int loc = scalePoint(index, &CSize(0, DemoData.get_anz_s()), &CSize(0, rahmen.Width())) + rahmen.left + paddingLeft;
-			dc.SelectObject(&stdbrush.gray);
-			dc.SelectObject(&stdpen.black1);
-			dc.Rectangle(loc - 5, rahmen.bottom - paddingBottom + nullLine, loc + 5, rahmen.bottom - paddingBottom + nullLine - scalePoint(DemoData.get_wert(m_selection, index), &CSize(DemoData.minimum(m_selection), DemoData.maximum(m_selection)), &CSize(0, rahmen.Height() - paddingHeight)));
+			int loc = scalePoint(index, &dataRangeWidth, &windowRangeWidth);
+			//dc.Rectangle(loc - 5, rahmen.bottom - scalePoint(0, &dataRangeHeight, &windowRangeHeight), loc + 5, rahmen.bottom - paddingBottom + nullLine - scalePoint(DemoData.get_wert(m_selection, index), &CSize(DemoData.minimum(m_selection), DemoData.maximum(m_selection)), &CSize(0, rahmen.Height() - paddingHeight)));
+		
 		}
 	}
 	dc.SelectObject(oldPen);
