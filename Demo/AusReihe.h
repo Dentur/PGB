@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Daten.h"
 
 // AusReihe-Dialogfeld
 
@@ -19,6 +20,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 	CRect rahmen;
+	char infoflag[MAX_SPALTEN];
 public:
 	int m_darstellung;
 	int m_selection;

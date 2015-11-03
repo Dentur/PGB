@@ -5,7 +5,6 @@
 #include "Demo.h"
 #include "AusReihe.h"
 #include "afxdialogex.h"
-#include "Daten.h"
 #include "draw.h"
 
 #define paddingLeft 20
@@ -39,6 +38,11 @@ AusReihe::AusReihe(CWnd* pParent /*=NULL*/)
 	m_xraster = TRUE;
 	m_yraster = TRUE;
 	m_darstellung = 0;
+
+	for (int index = 0; index < MAX_SPALTEN; index++)
+	{
+		infoflag[index] = 1;
+	}
 
 	UpdateData(FALSE);
 	SetWindowText("Datenreihe: " + DemoData.get_name());
@@ -173,6 +177,30 @@ void AusReihe::OnPaint()
 			int loc = scalePoint(index, &dataRangeWidth, &windowRangeWidth);
 			//dc.Rectangle(loc - 5, rahmen.bottom - scalePoint(0, &dataRangeHeight, &windowRangeHeight), loc + 5, rahmen.bottom - paddingBottom + nullLine - scalePoint(DemoData.get_wert(m_selection, index), &CSize(DemoData.minimum(m_selection), DemoData.maximum(m_selection)), &CSize(0, rahmen.Height() - paddingHeight)));
 		
+		}
+	}
+
+	//Draw all Selected 
+	dc.SelectObject(&stdfont.norm);
+	dc.SelectObject(&stdpen.black1);
+	dc.SelectObject(&stdbrush.yellow);
+	dc.SetBkMode(TRANSPARENT);
+	for (int index = 0; index < DemoData.get_anz_s(); index++)
+	{
+		if (infoflag[index])
+		{
+			CPoint loc = CPoint(
+				scalePoint(index, &dataRangeWidth, &windowRangeWidth),
+				rahmen.bottom - scalePoint(DemoData.get_wert(m_selection, index), &dataRangeHeight, &windowRangeHeight)
+				);
+			CRect r = CRect(loc.x, loc.y, 0, 0);
+			CString str;
+			str.Format("%d", DemoData.get_wert(m_selection, index));
+			dc.DrawText(str, &r, DT_CALCRECT);
+			r.OffsetRect(0, -r.Height());
+			r.right += 6;
+			dc.Rectangle(&r);
+			dc.DrawText(str, &r, DT_SINGLELINE | DT_CENTER | DT_VCENTER);
 		}
 	}
 	dc.SelectObject(oldPen);
