@@ -176,7 +176,7 @@ void AusReihe::OnPaint()
 		{
 			int loc = scalePoint(index, &dataRangeWidth, &windowRangeWidth);
 			//dc.Rectangle(loc - 5, rahmen.bottom - scalePoint(0, &dataRangeHeight, &windowRangeHeight), loc + 5, rahmen.bottom - paddingBottom + nullLine - scalePoint(DemoData.get_wert(m_selection, index), &CSize(DemoData.minimum(m_selection), DemoData.maximum(m_selection)), &CSize(0, rahmen.Height() - paddingHeight)));
-		
+			dc.Rectangle(loc - 5, rahmen.bottom - scalePoint(0, &dataRangeHeight, &windowRangeHeight), loc + 5, rahmen.bottom - scalePoint(DemoData.get_wert(m_selection, index), &dataRangeHeight, &windowRangeHeight));
 		}
 	}
 
