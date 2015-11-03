@@ -491,6 +491,16 @@ BEGIN
     CONTROL         "",IDC_DIAGRAMM,"Static",SS_BLACKFRAME,7,51,295,119
 END
 
+IDD_AusReiheEin DIALOGEX 0, 0, 117, 54
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,33,50,14
+    PUSHBUTTON      "Abbrechen",IDCANCEL,59,33,50,14
+    LTEXT           "Wert:",IDC_STATIC,7,18,20,8
+    EDITTEXT        IDC_EDIT1,35,15,70,14,ES_AUTOHSCROLL
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -554,6 +564,14 @@ BEGIN
         RIGHTMARGIN, 302
         TOPMARGIN, 7
         BOTTOMMARGIN, 170
+    END
+
+    IDD_AusReiheEin, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 110
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 47
     END
 END
 #endif    // APSTUDIO_INVOKED

@@ -102,6 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AusReihe.h" />
+    <ClInclude Include="AusReiheEin.h" />
     <ClInclude Include="Daten.h" />
     <ClInclude Include="DatenNeu.h" />
     <ClInclude Include="Demo.h" />
@@ -120,6 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AusReihe.cpp" />
+    <ClCompile Include="AusReiheEin.cpp" />
     <ClCompile Include="Daten.cpp" />
     <ClCompile Include="DatenNeu.cpp" />
     <ClCompile Include="Demo.cpp" />

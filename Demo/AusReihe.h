@@ -20,7 +20,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 	CRect rahmen;
-	char infoflag[MAX_SPALTEN];
+	bool infoflag[MAX_SPALTEN];
 public:
 	int m_darstellung;
 	int m_selection;
@@ -37,5 +37,7 @@ public:
 
 
 	int scalePoint(int p, CSize* s1, CSize* s2);
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
 };
 

@@ -6,6 +6,7 @@
 #include "AusReihe.h"
 #include "afxdialogex.h"
 #include "draw.h"
+#include "AusReiheEin.h"
 
 #define paddingLeft 20
 #define paddingRight 20
@@ -41,7 +42,7 @@ AusReihe::AusReihe(CWnd* pParent /*=NULL*/)
 
 	for (int index = 0; index < MAX_SPALTEN; index++)
 	{
-		infoflag[index] = 1;
+		infoflag[index] = 0;
 	}
 
 	UpdateData(FALSE);
@@ -75,6 +76,8 @@ BEGIN_MESSAGE_MAP(AusReihe, CDialog)
 	ON_CBN_SELCHANGE(IDC_REIHE, &AusReihe::OnCbnSelchangeReihe)
 	ON_BN_CLICKED(IDC_XRASTER, &AusReihe::OnBnClickedXraster)
 	ON_BN_CLICKED(IDC_YRASTER, &AusReihe::OnBnClickedYraster)
+	ON_WM_LBUTTONDOWN()
+	ON_WM_LBUTTONDBLCLK()
 END_MESSAGE_MAP()
 
 
@@ -121,10 +124,10 @@ void AusReihe::OnPaint()
 
 	CSize dataRangeHeight, dataRangeWidth, windowRangeHeight, windowRangeWidth;
 	dataRangeHeight = CSize(DemoData.minimum(m_selection), DemoData.maximum(m_selection));
-	dataRangeWidth = CSize(0, DemoData.get_anz_s());
+	dataRangeWidth = CSize(0, DemoData.get_anz_s()-1);
 	//windowRangeHeight = CSize(rahmen.top + 1*paddingTop, rahmen.bottom - 1*paddingBottom);
 	windowRangeHeight = CSize(paddingTop, rahmen.Height()-paddingHeight);
-	windowRangeWidth = CSize(rahmen.left + paddingLeft, rahmen.right - 0*paddingRight);
+	windowRangeWidth = CSize(rahmen.left + paddingLeft, rahmen.right - 1*paddingRight);
 	//draw null line
 	dc.SelectObject(&stdpen.black2);
 	if ((DemoData.minimum(m_selection) < 0) && (DemoData.maximum(m_selection) > 0))
@@ -244,4 +247,73 @@ void AusReihe::OnBnClickedYraster()
 int AusReihe::scalePoint(int p, CSize* s1, CSize* s2)
 {
 	return((p - s1->cx)*(s2->cy - s2->cx)) / (s1->cy - s1->cx) + s2->cx;
+}
+
+void AusReihe::OnLButtonDown(UINT nFlags, CPoint point)
+{
+
+	if (rahmen.PtInRect(point))
+	{
+		CSize dataRangeHeight, dataRangeWidth, windowRangeHeight, windowRangeWidth;
+		dataRangeHeight = CSize(DemoData.minimum(m_selection), DemoData.maximum(m_selection));
+		dataRangeWidth = CSize(0, DemoData.get_anz_s()-1);
+		windowRangeHeight = CSize(paddingTop, rahmen.Height() - paddingHeight);
+		windowRangeWidth = CSize(rahmen.left + paddingLeft, rahmen.right - paddingRight);
+		
+		//int spalte = scalePoint(point.x, &windowRangeWidth, &dataRangeWidth);
+		for (int spalte = 0; spalte < DemoData.get_anz_s(); spalte++)
+		{
+			CPoint p = CPoint(
+				scalePoint(spalte, &dataRangeWidth, &windowRangeWidth),
+				rahmen.bottom - scalePoint(DemoData.get_wert(m_selection, spalte), &dataRangeHeight, &windowRangeHeight)
+				);
+			CRect hitF = CRect(p.x - 10, p.y - 10, p.x + 10, p.y + 10);
+			if (hitF.PtInRect(point))
+			{
+				infoflag[spalte] = !infoflag[spalte];
+				hitF.InflateRect(40, 40);
+				RedrawWindow(hitF);
+				break;
+			}
+		}
+
+	}
+	CDialog::OnLButtonDown(nFlags, point);
+}
+
+
+void AusReihe::OnLButtonDblClk(UINT nFlags, CPoint point)
+{
+	if (rahmen.PtInRect(point))
+	{
+		CSize dataRangeHeight, dataRangeWidth, windowRangeHeight, windowRangeWidth;
+		dataRangeHeight = CSize(DemoData.minimum(m_selection), DemoData.maximum(m_selection));
+		dataRangeWidth = CSize(0, DemoData.get_anz_s() - 1);
+		windowRangeHeight = CSize(paddingTop, rahmen.Height() - paddingHeight);
+		windowRangeWidth = CSize(rahmen.left + paddingLeft, rahmen.right - paddingRight);
+
+		//int spalte = scalePoint(point.x, &windowRangeWidth, &dataRangeWidth);
+		for (int spalte = 0; spalte < DemoData.get_anz_s(); spalte++)
+		{
+			CPoint p = CPoint(
+				scalePoint(spalte, &dataRangeWidth, &windowRangeWidth),
+				rahmen.bottom - scalePoint(DemoData.get_wert(m_selection, spalte), &dataRangeHeight, &windowRangeHeight)
+				);
+			CRect hitF = CRect(p.x - 10, p.y - 10, p.x + 10, p.y + 10);
+			if (hitF.PtInRect(point))
+			{
+				AusReiheEin ein;
+				ein.wert = DemoData.get_wert(m_selection, spalte);
+				if (ein.DoModal() == IDOK)
+				{
+					DemoData.set_wert(m_selection, spalte, ein.wert);
+					GetParentFrame()->GetActiveDocument()->SetModifiedFlag();
+					RedrawWindow();
+				}
+				break;
+			}
+		}
+
+	}
+	CDialog::OnLButtonDblClk(nFlags, point);
 }
