@@ -111,6 +111,7 @@
     <ClInclude Include="draw.h" />
     <ClInclude Include="EinDaten.h" />
     <ClInclude Include="EinReihe.h" />
+    <ClInclude Include="Legende.h" />
     <ClInclude Include="LoeschWarnung.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="NewName.h" />
@@ -130,6 +131,7 @@
     <ClCompile Include="draw.cpp" />
     <ClCompile Include="EinDaten.cpp" />
     <ClCompile Include="EinReihe.cpp" />
+    <ClCompile Include="Legende.cpp" />
     <ClCompile Include="LoeschWarnung.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="NewName.cpp" />

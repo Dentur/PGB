@@ -27,8 +27,9 @@
 #define IDD_EINDATEN                    315
 #define IDD_DATENREIHE                  316
 #define IDD_AUSREIHE                    317
-#define IDD_DIALOG1                     318
 #define IDD_AusReiheEin                 318
+#define IDD_Legende                     320
+#define IDD_LEGENDE                     320
 #define ID_EINGABE_TESTDATEN            1005
 #define IDC_DATENNAME                   1006
 #define IDC_ANZAHL_S                    1007
@@ -65,13 +66,14 @@
 #define ID_EINGABE_TESTDATEIN32777      32777
 #define ID_AUSGABE_DATENREIHE           32778
 #define ID_ANSICHT_EINGABELEISTE        32779
+#define ID_AUSGABE_LEGENDE              32780
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        319
-#define _APS_NEXT_COMMAND_VALUE         32780
+#define _APS_NEXT_RESOURCE_VALUE        321
+#define _APS_NEXT_COMMAND_VALUE         32781
 #define _APS_NEXT_CONTROL_VALUE         1037
 #define _APS_NEXT_SYMED_VALUE           310
 #endif

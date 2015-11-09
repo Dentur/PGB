@@ -13,6 +13,7 @@
 #include "EinReihe.h"
 #include "AusReihe.h"
 #include "draw.h"
+#include "Legende.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -42,6 +43,8 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_UPDATE_COMMAND_UI(ID_EINGABE_TESTDATEN, &CMainFrame::OnUpdateEingabeTestdaten)
 	ON_COMMAND(ID_ANSICHT_EINGABELEISTE, &CMainFrame::OnAnsichtEingabeleiste)
 	ON_UPDATE_COMMAND_UI(ID_ANSICHT_EINGABELEISTE, &CMainFrame::OnUpdateAnsichtEingabeleiste)
+	ON_COMMAND(ID_AUSGABE_LEGENDE, &CMainFrame::OnAusgabeLegende)
+	ON_UPDATE_COMMAND_UI(ID_AUSGABE_LEGENDE, &CMainFrame::OnUpdateAusgabeLegende)
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -330,4 +333,16 @@ void CMainFrame::OnUpdateAnsichtEingabeleiste(CCmdUI *pCmdUI)
 {
 	pCmdUI->Enable(TRUE);
 	pCmdUI->SetCheck(dialogbar_ein.IsWindowVisible());
+}
+
+
+void CMainFrame::OnAusgabeLegende()
+{
+	new Legende;
+}
+
+
+void CMainFrame::OnUpdateAusgabeLegende(CCmdUI *pCmdUI)
+{
+	pCmdUI->Enable(TRUE);
 }

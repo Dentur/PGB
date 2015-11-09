@@ -59,6 +59,8 @@ public:
 	afx_msg void OnUpdateEingabeTestdaten(CCmdUI *pCmdUI);
 	afx_msg void OnAnsichtEingabeleiste();
 	afx_msg void OnUpdateAnsichtEingabeleiste(CCmdUI *pCmdUI);
+	afx_msg void OnAusgabeLegende();
+	afx_msg void OnUpdateAusgabeLegende(CCmdUI *pCmdUI);
 };
 
 

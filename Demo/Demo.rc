@@ -93,6 +93,7 @@ BEGIN
     POPUP "Ausgabe"
     BEGIN
         MENUITEM "Datenreihe",                  ID_AUSGABE_DATENREIHE
+        MENUITEM "Legende",                     ID_AUSGABE_LEGENDE
     END
     POPUP "&Ansicht"
     BEGIN
@@ -501,6 +502,14 @@ BEGIN
     EDITTEXT        IDC_EDIT1,35,15,70,14,ES_AUTOHSCROLL
 END
 
+IDD_LEGENDE DIALOGEX 0, 0, 271, 178
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Legnde"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -572,6 +581,14 @@ BEGIN
         RIGHTMARGIN, 110
         TOPMARGIN, 7
         BOTTOMMARGIN, 47
+    END
+
+    IDD_LEGENDE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 264
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 171
     END
 END
 #endif    // APSTUDIO_INVOKED
