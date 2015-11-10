@@ -25,4 +25,6 @@ protected:
 
 public:
 	int columns;
+	afx_msg void OnPaint();
+	afx_msg void OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
 };
