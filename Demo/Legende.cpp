@@ -10,7 +10,7 @@
 #include "EinReihe.h"
 
 #define ABSTAND 2
-#define COLORRECTWITH 15
+#define COLORRECTWIDTH 15
 
 // Legende-Dialogfeld
 IMPLEMENT_DYNAMIC(Legende, CDialog)
@@ -60,7 +60,7 @@ void Legende::OnPaint()
 			maxWidth = temp.Width();
 	}
 	size.bottom = 5 * ABSTAND + DemoData.get_anz_z()*temp.Height() +DemoData.get_anz_z()*ABSTAND;
-	size.right = 7*ABSTAND+maxWidth+COLORRECTWITH+50;
+	size.right = 7*ABSTAND+maxWidth+COLORRECTWIDTH+50;
 	CRect pos;
 	GetWindowRect(&pos);
 	size.OffsetRect(pos.TopLeft());
@@ -78,16 +78,16 @@ void Legende::OnPaint()
 	dc.Rectangle(size);
 
 	//draw the legend
-	CRect color = CRect(2 * ABSTAND, 2 * ABSTAND, 2 * ABSTAND + COLORRECTWITH, 2 * ABSTAND+COLORRECTWITH);
+	CRect color = CRect(2 * ABSTAND, 2 * ABSTAND, 2 * ABSTAND + COLORRECTWIDTH, 2 * ABSTAND+COLORRECTWIDTH);
 	//CPoint colorPos = CPoint(2 * ABSTAND, 2 * ABSTAND);
-	CPoint textPos = CPoint(2 * ABSTAND + COLORRECTWITH, 1 * ABSTAND);
+	CPoint textPos = CPoint(2 * ABSTAND + COLORRECTWIDTH, 1 * ABSTAND);
 	dc.SetBkMode(TRANSPARENT);
 	for (int index = 0; index < DemoData.get_anz_z(); index++)
 	{
 		CBrush brush(DemoData.get_farbe(index));
 		dc.SelectObject(&brush);
 		dc.Rectangle(&color);
-		color.OffsetRect(0, ABSTAND + COLORRECTWITH);
+		color.OffsetRect(0, ABSTAND + COLORRECTWIDTH);
 		CRect text = CRect(textPos.x, textPos.y, 0, 0);
 		dc.DrawText(DemoData.get_rname(index), &text, DT_CALCRECT);
 		dc.DrawText(DemoData.get_rname(index), &text, DT_SINGLELINE | DT_CENTER | DT_VCENTER);
@@ -106,7 +106,7 @@ void Legende::OnLButtonDblClk(UINT nFlags, CPoint point)
 	GetWindowRect(&r);
 	for (int index = 0; index < DemoData.get_anz_z(); index++)
 	{
-		CRect hit = CRect(0, 2 * ABSTAND + index*(COLORRECTWITH + ABSTAND), 200, 2 * ABSTAND + index*(COLORRECTWITH + ABSTAND) + COLORRECTWITH);
+		CRect hit = CRect(0, 2 * ABSTAND + index*(COLORRECTWIDTH + ABSTAND), 200, 2 * ABSTAND + index*(COLORRECTWIDTH + ABSTAND) + COLORRECTWIDTH);
 		if (hit.PtInRect(point))
 		{
 			EinReihe r(NULL, index);
