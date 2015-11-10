@@ -13,12 +13,13 @@
 
 IMPLEMENT_DYNAMIC(EinReihe, CDialog)
 
-EinReihe::EinReihe(CWnd* pParent /*=NULL*/)
+EinReihe::EinReihe(CWnd* pParent /*= NULL*/, int rno/* = 1*/)
 	: CDialog(EinReihe::IDD, pParent)
 	, reihe(0)
 	, name(_T(""))
 {
-
+	reihe = rno+1;
+	//rowChanged(reihe);
 }
 
 EinReihe::~EinReihe()
@@ -50,7 +51,7 @@ BOOL EinReihe::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 	UpdateData(TRUE);
-	reihe = 1;
+	//reihe = 1;
 	rowChanged(reihe);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
