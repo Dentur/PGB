@@ -61,6 +61,8 @@ public:
 	afx_msg void OnUpdateAnsichtEingabeleiste(CCmdUI *pCmdUI);
 	afx_msg void OnAusgabeLegende();
 	afx_msg void OnUpdateAusgabeLegende(CCmdUI *pCmdUI);
+	afx_msg void OnAusgabeTabelle();
+	afx_msg void OnUpdateAusgabeTabelle(CCmdUI *pCmdUI);
 };
 
 

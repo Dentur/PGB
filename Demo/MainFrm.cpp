@@ -14,6 +14,7 @@
 #include "AusReihe.h"
 #include "draw.h"
 #include "Legende.h"
+#include "Tabelle.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -45,6 +46,8 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_UPDATE_COMMAND_UI(ID_ANSICHT_EINGABELEISTE, &CMainFrame::OnUpdateAnsichtEingabeleiste)
 	ON_COMMAND(ID_AUSGABE_LEGENDE, &CMainFrame::OnAusgabeLegende)
 	ON_UPDATE_COMMAND_UI(ID_AUSGABE_LEGENDE, &CMainFrame::OnUpdateAusgabeLegende)
+	ON_COMMAND(ID_AUSGABE_TABELLE, &CMainFrame::OnAusgabeTabelle)
+	ON_UPDATE_COMMAND_UI(ID_AUSGABE_TABELLE, &CMainFrame::OnUpdateAusgabeTabelle)
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -343,6 +346,18 @@ void CMainFrame::OnAusgabeLegende()
 
 
 void CMainFrame::OnUpdateAusgabeLegende(CCmdUI *pCmdUI)
+{
+	pCmdUI->Enable(TRUE);
+}
+
+
+void CMainFrame::OnAusgabeTabelle()
+{
+	new Tabelle;
+}
+
+
+void CMainFrame::OnUpdateAusgabeTabelle(CCmdUI *pCmdUI)
 {
 	pCmdUI->Enable(TRUE);
 }
