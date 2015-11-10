@@ -19,6 +19,10 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 
+	CScrollBar sbar;
+	CRect scrollrect;
+	int actpos, maxpos;
+
 public:
 	int columns;
 };

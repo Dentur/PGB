@@ -25,17 +25,35 @@ Tabelle::Tabelle(CWnd* pParent /*=NULL*/)
 {
 	int hoehe, breite;
 	int as, az;
-	CRect r;
+	CRect r, sbr;
+
 
 	Create(Tabelle::IDD, pParent);
 	as = DemoData.get_anz_s();
 	az = DemoData.get_anz_z();
 
-	columns = as > maxcolumns ? maxcolumns : as;
+	//columns = as > maxcolumns ? maxcolumns : as;
+	if (as > maxcolumns)
+		columns = maxcolumns;
+	else
+		columns = as;
 	hoehe = 3 * abstand + (az + 1)*feldhoehe;
 	breite = 3 * abstand + namenbreite + columns*feldbreite;
+
+	scrollrect.SetRect(2 * abstand + namenbreite + 1, abstand+1, breite - abstand-1, hoehe - abstand-1);
+	maxpos = (as - maxcolumns)*feldbreite;
+	actpos = 0;
+
 	if (columns < as)
+	{
 		hoehe += abstand + scrollbarhohe;
+		sbr.SetRect(2 * abstand + namenbreite,
+			hoehe - abstand - scrollbarhohe,
+			breite - abstand, hoehe - abstand);
+		sbar.Create(WS_CHILD | WS_VISIBLE | SBS_HORZ, sbr, this, 1);
+		sbar.SetScrollRange(0, maxpos);
+		sbar.SetScrollPos(actpos);
+	}
 	r.SetRect(0, 0, breite, hoehe);
 	r.OffsetRect(100, 100);
 	CalcWindowRect(&r, 0);
