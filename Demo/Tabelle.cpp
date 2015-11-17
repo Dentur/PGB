@@ -114,7 +114,8 @@ void Tabelle::OnPaint()
 		CRect field;
 		field.SetRect(0, 0, feldbreite, feldhoehe);
 		field.OffsetRect(feldbreite*index+2*abstand+namenbreite-actpos-index,abstand);
-		//if (udp.IntersectRect(&field, &udp))
+		CRect dump;
+		if (IntersectRect(&dump, udp, &field))
 		{
 			dc.SelectObject(&stdbrush.white);
 			dc.Rectangle(&field);
@@ -126,8 +127,8 @@ void Tabelle::OnPaint()
 			{
 				dc.SelectObject(&stdbrush.white);
 				dc.Rectangle(field);
-				s.Format("%d", DemoData.get_wert(index, jndex));
-				if (DemoData.get_wert(index, jndex) < 0)
+				s.Format("%d", DemoData.get_wert(jndex, index));
+				if (DemoData.get_wert(jndex, index) < 0)
 				{
 					dc.SetTextColor(RGB(255, 20, 20));
 				}
@@ -222,10 +223,10 @@ void Tabelle::OnLButtonDblClk(UINT nFlags, CPoint point)
 	x = pRel.x/(feldbreite-1);
 
 	AusReiheEin ein;
-	ein.wert = DemoData.get_wert(x, y);
+	ein.wert = DemoData.get_wert(y, x);
 	if (ein.DoModal() == IDOK)
 	{
-		DemoData.set_wert(x, y, ein.wert);
+		DemoData.set_wert(y, x, ein.wert);
 		GetParentFrame()->GetActiveDocument()->SetModifiedFlag();
 		RedrawWindow();
 	}
