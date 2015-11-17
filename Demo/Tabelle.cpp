@@ -7,6 +7,7 @@
 #include "afxdialogex.h"
 #include "Daten.h"
 #include "draw.h"
+#include "AusReiheEin.h"
 
 
 static const int feldhoehe = 16;
@@ -77,6 +78,7 @@ void Tabelle::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(Tabelle, CDialog)
 	ON_WM_PAINT()
 	ON_WM_HSCROLL()
+	ON_WM_LBUTTONDBLCLK()
 END_MESSAGE_MAP()
 
 
@@ -114,6 +116,7 @@ void Tabelle::OnPaint()
 		field.OffsetRect(feldbreite*index+2*abstand+namenbreite-actpos-index,abstand);
 		//if (udp.IntersectRect(&field, &udp))
 		{
+			dc.SelectObject(&stdbrush.white);
 			dc.Rectangle(&field);
 			CString s;
 			s.Format("%d", index + 1);
@@ -121,9 +124,19 @@ void Tabelle::OnPaint()
 			field.OffsetRect(0, abstand+feldhoehe);
 			for (int jndex = 0; jndex < DemoData.get_anz_s(); jndex++)
 			{
+				dc.SelectObject(&stdbrush.white);
 				dc.Rectangle(field);
 				s.Format("%d", DemoData.get_wert(index, jndex));
+				if (DemoData.get_wert(index, jndex) < 0)
+				{
+					dc.SetTextColor(RGB(255, 20, 20));
+				}
+				else
+				{
+					dc.SetTextColor(RGB(0, 0, 0));
+				}
 				dc.DrawText(s, field, DT_SINGLELINE | DT_CENTER | DT_VCENTER);
+				dc.SetTextColor(RGB(0, 0, 0));
 				field.OffsetRect(0, feldhoehe - 1);
 			}
 		}
@@ -195,4 +208,27 @@ void Tabelle::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 
 
 	CDialog::OnHScroll(nSBCode, nPos, pScrollBar);
+}
+
+
+void Tabelle::OnLButtonDblClk(UINT nFlags, CPoint point)
+{
+	//Calculate the field that was clicked
+	CPoint pRel = point - scrollrect.TopLeft();
+	pRel.x += actpos;
+	pRel.y -= feldhoehe + abstand;
+	int x, y;
+	y = pRel.y/(feldhoehe-1);
+	x = pRel.x/(feldbreite-1);
+
+	AusReiheEin ein;
+	ein.wert = DemoData.get_wert(x, y);
+	if (ein.DoModal() == IDOK)
+	{
+		DemoData.set_wert(x, y, ein.wert);
+		GetParentFrame()->GetActiveDocument()->SetModifiedFlag();
+		RedrawWindow();
+	}
+
+	CDialog::OnLButtonDblClk(nFlags, point);
 }
