@@ -17,6 +17,7 @@ static const int abstand = 4;
 static const int maxcolumns = 10;
 static const int scrollbarhohe = 16;
 
+#define MY_COMMAND_BASE 32782
 
 // Tabelle-Dialogfeld
 
@@ -79,6 +80,7 @@ BEGIN_MESSAGE_MAP(Tabelle, CDialog)
 	ON_WM_PAINT()
 	ON_WM_HSCROLL()
 	ON_WM_LBUTTONDBLCLK()
+	ON_WM_RBUTTONDOWN()
 END_MESSAGE_MAP()
 
 
@@ -115,7 +117,7 @@ void Tabelle::OnPaint()
 		field.SetRect(0, 0, feldbreite, feldhoehe);
 		field.OffsetRect(feldbreite*index+2*abstand+namenbreite-actpos-index,abstand);
 		CRect dump;
-		if (IntersectRect(&dump, udp, &field))
+		if (IntersectRect(&dump, &udp, &field))
 		{
 			dc.SelectObject(&stdbrush.white);
 			dc.Rectangle(&field);
@@ -126,6 +128,11 @@ void Tabelle::OnPaint()
 			for (int jndex = 0; jndex < DemoData.get_anz_s(); jndex++)
 			{
 				dc.SelectObject(&stdbrush.white);
+				CBrush b(RGB(20, 20, 255));
+				if (selectedField == CPoint(index, jndex))
+				{
+					dc.SelectObject(&b);
+				}
 				dc.Rectangle(field);
 				s.Format("%d", DemoData.get_wert(jndex, index));
 				if (DemoData.get_wert(jndex, index) < 0)
@@ -135,6 +142,10 @@ void Tabelle::OnPaint()
 				else
 				{
 					dc.SetTextColor(RGB(0, 0, 0));
+				}
+				if (selectedField == CPoint(index, jndex))
+				{
+					dc.SetTextColor(RGB(255, 255, 255));
 				}
 				dc.DrawText(s, field, DT_SINGLELINE | DT_CENTER | DT_VCENTER);
 				dc.SetTextColor(RGB(0, 0, 0));
@@ -232,4 +243,43 @@ void Tabelle::OnLButtonDblClk(UINT nFlags, CPoint point)
 	}
 
 	CDialog::OnLButtonDblClk(nFlags, point);
+}
+
+
+void Tabelle::OnRButtonDown(UINT nFlags, CPoint point)
+{
+	CPoint pRel = point - scrollrect.TopLeft();
+	pRel.x += actpos;
+	pRel.y -= feldhoehe + abstand;
+	selectedField.x = pRel.x / (feldbreite - 1);
+	selectedField.y = pRel.y / (feldhoehe - 1);
+	CMenu menu;
+	menu.CreatePopupMenu();
+	CRect r;
+	GetWindowRect(&r);
+	for (int index = 0; index < 7; index++)
+	{
+		//if (index == 3) continue;
+		CString s;
+		s.Format("%d", DemoData.get_wert(selectedField.y,selectedField.x)-3+index);
+		menu.InsertMenu(index, MF_BYPOSITION | MF_STRING, MY_COMMAND_BASE+index, s);
+	}
+	RedrawWindow();
+	menu.TrackPopupMenu(TPM_RIGHTALIGN | TPM_LEFTBUTTON, point.x+r.left+10, point.y+r.top+30, this);
+	CDialog::OnRButtonDown(nFlags, point);
+}
+
+
+BOOL Tabelle::OnCommand(WPARAM wParam, LPARAM lParam)
+{
+	if ((wParam >= MY_COMMAND_BASE) && (wParam < MY_COMMAND_BASE + 7))
+	{
+		//GetWindowPl
+		DemoData.set_wert(selectedField.y, selectedField.x, DemoData.get_wert(selectedField.y, selectedField.x) + (MY_COMMAND_BASE - wParam - 3));
+		selectedField.SetPoint(-1, -1);
+		RedrawWindow();
+		GetParentFrame()->GetActiveDocument()->SetModifiedFlag();
+	}
+
+	return CDialog::OnCommand(wParam, lParam);
 }

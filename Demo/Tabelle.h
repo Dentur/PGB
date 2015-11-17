@@ -22,10 +22,13 @@ protected:
 	CScrollBar sbar;
 	CRect scrollrect;
 	int actpos, maxpos;
+	CPoint selectedField;
 
 public:
 	int columns;
 	afx_msg void OnPaint();
 	afx_msg void OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
 	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
+	afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
+	virtual BOOL OnCommand(WPARAM wParam, LPARAM lParam);
 };
