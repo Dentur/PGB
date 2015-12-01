@@ -79,7 +79,8 @@ BEGIN_MESSAGE_MAP(Grafik, CDialog)
 
 	ON_BN_CLICKED(ANZEIGEN, OnAnzeigen)
 	ON_BN_CLICKED(GLPLUS, OnGlPlus)
-	ON_BN_CLICKED(GLMINUS, OnGlMinus)
+	ON_BN_CLICKED(GLMINUS, OnGlMinus)
+
 	ON_WM_CLOSE()
 END_MESSAGE_MAP()
 
@@ -177,9 +178,13 @@ void Grafik::OnPaint()
 	minV = DemoData.maximum();
 	maxV = DemoData.minimum();
 	//get the min and max values
+	if (vmax > DemoData.get_anz_s())
+		vmax = DemoData.get_anz_s();
+	if (vmin < 1)
+		vmin = 1;
 	for (int index = 0; index < DemoData.get_anz_z(); index++)
 	{
-		for (int jndex = 0; jndex < DemoData.get_anz_z(); jndex++)
+		for (int jndex = vmin-1; jndex < vmax; jndex++)
 		{
 			int wert = DemoData.get_wert(index, jndex);
 			if (wert < minV)
@@ -197,9 +202,9 @@ void Grafik::OnPaint()
 	}
 	
 	dc.SelectObject(&stdpen.black1);
-	for (int index = 0; index < DemoData.get_anz_s(); index++)
+	for (int index = 0; index <= vmax - vmin; index++)
 	{
-		CPoint p = CPoint(scalePoint(index, &CSize(0, DemoData.get_anz_s()-1), &CSize(drawRegion.left+abstand, drawRegion.right-abstand)), drawRegion.top);
+		CPoint p = CPoint(scalePoint(index, &CSize(0, vmax - vmin), &CSize(drawRegion.left + abstand, drawRegion.right - abstand)), drawRegion.top);
 		dc.MoveTo(p);
 		p.y = drawRegion.bottom;
 		dc.LineTo(p);
@@ -211,10 +216,10 @@ void Grafik::OnPaint()
 			continue;
 		CPen tempBrush = CPen(PS_SOLID, 5,DemoData.get_farbe(index));
 		dc.SelectObject(&tempBrush);
-		for (int jndex = 0; jndex < DemoData.get_anz_s(); jndex++)
+		for (int jndex = vmin-1; jndex < vmax; jndex++)
 		{
-			CPoint p = CPoint(scalePoint(jndex, &CSize(0, DemoData.get_anz_s() - 1), &CSize(drawRegion.left + abstand, drawRegion.right - abstand)), scalePoint(DemoData.get_wert(index, jndex), &CSize(minV, maxV), &CSize(drawRegion.top + abstand, drawRegion.bottom - abstand)));
-			if (jndex == 0)
+			CPoint p = CPoint(scalePoint(jndex, &CSize(vmin-1, vmax-1), &CSize(drawRegion.left + abstand, drawRegion.right - abstand)), scalePoint(DemoData.get_wert(index, jndex), &CSize(minV, maxV), &CSize(drawRegion.top + abstand, drawRegion.bottom - abstand)));
+			if (jndex == vmin-1)
 				dc.MoveTo(p);
 			else
 				dc.LineTo(p);
