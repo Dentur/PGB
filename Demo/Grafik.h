@@ -18,6 +18,9 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV-Unterstützung
 
 	DECLARE_MESSAGE_MAP()
+	void OnAnzeigen();
+	void OnGlPlus();
+	void OnGlMinus();	int vmin;	int vmax;
 
 private:
 	CButton anzeigen;
@@ -28,10 +31,14 @@ private:
 	CEdit von;
 	CEdit bis;
 	CListBox auswahl;
+	int scalePoint(int p, CSize* s1, CSize* s2);
+	CRect drawRegion;
 
 public:
 	//virtual BOOL Create(LPCTSTR lpszTemplateName, CWnd* pParentWnd = NULL);
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg void OnGetMinMaxInfo(MINMAXINFO* lpMMI);
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	afx_msg void OnPaint();
+	afx_msg void OnClose();
 };

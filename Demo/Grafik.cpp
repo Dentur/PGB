@@ -7,6 +7,7 @@
 #include "afxdialogex.h"
 #include "dialogfont.h"
 #include "Daten.h"
+#include "draw.h"
 
 
 # define ANZEIGEN 1
@@ -31,6 +32,8 @@ static const int offset5 = 94;
 static const int hoehe5 = 20;
 static const int offset6 = 114;
 
+static const int abstand = 5;
+
 static const int minb = 400;
 static const int minh = 200;
 
@@ -42,6 +45,8 @@ IMPLEMENT_DYNAMIC(Grafik, CDialog)
 
 Grafik::Grafik(CWnd* pParent /*=NULL*/)
 	: CDialog(Grafik::IDD, pParent)
+	, vmin(1)
+	, vmax(20)
 {
 	
 	CRect r;
@@ -61,6 +66,8 @@ Grafik::~Grafik()
 void Grafik::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
+	DDX_Text(pDX, VON, vmin);
+	DDX_Text(pDX, BIS, vmax);
 }
 
 
@@ -68,6 +75,12 @@ BEGIN_MESSAGE_MAP(Grafik, CDialog)
 	ON_WM_SIZE()
 	ON_WM_GETMINMAXINFO()
 	ON_WM_CREATE()
+	ON_WM_PAINT()
+
+	ON_BN_CLICKED(ANZEIGEN, OnAnzeigen)
+	ON_BN_CLICKED(GLPLUS, OnGlPlus)
+	ON_BN_CLICKED(GLMINUS, OnGlMinus)
+	ON_WM_CLOSE()
 END_MESSAGE_MAP()
 
 
@@ -89,6 +102,9 @@ void Grafik::OnSize(UINT nType, int cx, int cy)
 	bis.MoveWindow(left_control_border + (controlbreite - 2) / 2 + 2, cy - offset5, (controlbreite - 2) / 2, hoehe5, FALSE);
 	auswahl.MoveWindow(left_control_border, 0, controlbreite, cy - offset6, FALSE);
 	Invalidate();
+	//CRect temp;
+	//GetWindowRect(&temp);
+	drawRegion = new CRect(abstand, abstand, left_control_border - abstand, cy - abstand);
 }
 
 
@@ -140,4 +156,95 @@ int Grafik::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	for (i = 0; i < DemoData.get_anz_z(); i++)
 		auswahl.AddString(DemoData.get_rname(i));
 	return 0;
+}
+
+int Grafik::scalePoint(int p, CSize* s1, CSize* s2)
+{
+	return((p - s1->cx)*(s2->cy - s2->cx)) / (s1->cy - s1->cx) + s2->cx;
+}
+
+
+void Grafik::OnPaint()
+{
+	CPaintDC dc(this); // device context for painting
+	int minV, maxV;
+	UpdateData(TRUE);
+	//draw drawing rect
+	dc.SelectObject(&stdpen.black1);
+	dc.SelectObject(&stdbrush.white);
+	dc.Rectangle(drawRegion);
+
+	minV = DemoData.maximum();
+	maxV = DemoData.minimum();
+	//get the min and max values
+	for (int index = 0; index < DemoData.get_anz_z(); index++)
+	{
+		for (int jndex = 0; jndex < DemoData.get_anz_z(); jndex++)
+		{
+			int wert = DemoData.get_wert(index, jndex);
+			if (wert < minV)
+			{
+				minV = wert;
+			}
+			else
+			{
+				if (wert > maxV)
+				{
+					maxV = wert;
+				}
+			}
+		}
+	}
+	
+	dc.SelectObject(&stdpen.black1);
+	for (int index = 0; index < DemoData.get_anz_s(); index++)
+	{
+		CPoint p = CPoint(scalePoint(index, &CSize(0, DemoData.get_anz_s()-1), &CSize(drawRegion.left+abstand, drawRegion.right-abstand)), drawRegion.top);
+		dc.MoveTo(p);
+		p.y = drawRegion.bottom;
+		dc.LineTo(p);
+	}
+
+	for (int index = 0; index < auswahl.GetCount(); index++)
+	{
+		if (!auswahl.GetSel(index))
+			continue;
+		CPen tempBrush = CPen(PS_SOLID, 5,DemoData.get_farbe(index));
+		dc.SelectObject(&tempBrush);
+		for (int jndex = 0; jndex < DemoData.get_anz_s(); jndex++)
+		{
+			CPoint p = CPoint(scalePoint(jndex, &CSize(0, DemoData.get_anz_s() - 1), &CSize(drawRegion.left + abstand, drawRegion.right - abstand)), scalePoint(DemoData.get_wert(index, jndex), &CSize(minV, maxV), &CSize(drawRegion.top + abstand, drawRegion.bottom - abstand)));
+			if (jndex == 0)
+				dc.MoveTo(p);
+			else
+				dc.LineTo(p);
+		}
+	}
+
+
+
+
+	UpdateData(FALSE);
+}
+
+
+void Grafik::OnClose()
+{
+	DestroyWindow();
+	delete this;
+}
+
+void Grafik::OnAnzeigen()
+{
+	RedrawWindow(&drawRegion);
+}
+
+void Grafik::OnGlMinus()
+{
+
+}
+
+void Grafik::OnGlPlus()
+{
+
 }
