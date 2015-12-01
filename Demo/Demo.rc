@@ -95,6 +95,7 @@ BEGIN
         MENUITEM "Datenreihe",                  ID_AUSGABE_DATENREIHE
         MENUITEM "Legende",                     ID_AUSGABE_LEGENDE
         MENUITEM "Tabelle",                     ID_AUSGABE_TABELLE
+        MENUITEM "Grafik",                      ID_AUSGABE_GRAFIK
     END
     POPUP "&Ansicht"
     BEGIN
@@ -518,6 +519,13 @@ FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
 END
 
+IDD_GRAFIK DIALOGEX 0, 0, 309, 178
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -605,6 +613,14 @@ BEGIN
         RIGHTMARGIN, 302
         TOPMARGIN, 7
         BOTTOMMARGIN, 170
+    END
+
+    IDD_GRAFIK, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 302
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 171
     END
 END
 #endif    // APSTUDIO_INVOKED

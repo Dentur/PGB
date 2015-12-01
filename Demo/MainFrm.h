@@ -63,6 +63,8 @@ public:
 	afx_msg void OnUpdateAusgabeLegende(CCmdUI *pCmdUI);
 	afx_msg void OnAusgabeTabelle();
 	afx_msg void OnUpdateAusgabeTabelle(CCmdUI *pCmdUI);
+	afx_msg void OnAusgabeGrafik();
+	afx_msg void OnUpdateAusgabeGrafik(CCmdUI *pCmdUI);
 };
 
 

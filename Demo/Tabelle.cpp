@@ -255,8 +255,6 @@ void Tabelle::OnRButtonDown(UINT nFlags, CPoint point)
 	selectedField.y = pRel.y / (feldhoehe - 1);
 	CMenu menu;
 	menu.CreatePopupMenu();
-	CRect r;
-	GetWindowRect(&r);
 	for (int index = 0; index < 7; index++)
 	{
 		//if (index == 3) continue;
@@ -265,7 +263,9 @@ void Tabelle::OnRButtonDown(UINT nFlags, CPoint point)
 		menu.InsertMenu(index, MF_BYPOSITION | MF_STRING, MY_COMMAND_BASE+index, s);
 	}
 	RedrawWindow();
-	menu.TrackPopupMenu(TPM_RIGHTALIGN | TPM_LEFTBUTTON, point.x+r.left+10, point.y+r.top+30, this);
+	CPoint pos;
+	GetCursorPos(&pos);
+	menu.TrackPopupMenu(TPM_RIGHTALIGN | TPM_LEFTBUTTON, pos.x, pos.y, this);
 	CDialog::OnRButtonDown(nFlags, point);
 }
 
@@ -275,7 +275,7 @@ BOOL Tabelle::OnCommand(WPARAM wParam, LPARAM lParam)
 	if ((wParam >= MY_COMMAND_BASE) && (wParam < MY_COMMAND_BASE + 7))
 	{
 		//GetWindowPl
-		DemoData.set_wert(selectedField.y, selectedField.x, DemoData.get_wert(selectedField.y, selectedField.x) + (MY_COMMAND_BASE - wParam - 3));
+		DemoData.set_wert(selectedField.y, selectedField.x, DemoData.get_wert(selectedField.y, selectedField.x) + (wParam - MY_COMMAND_BASE- 3));
 		selectedField.SetPoint(-1, -1);
 		RedrawWindow();
 		GetParentFrame()->GetActiveDocument()->SetModifiedFlag();
