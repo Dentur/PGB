@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Daten.h"
 
 // Grafik-Dialogfeld
 
@@ -20,7 +20,10 @@ protected:
 	DECLARE_MESSAGE_MAP()
 	void OnAnzeigen();
 	void OnGlPlus();
-	void OnGlMinus();	int vmin;	int vmax;
+	void OnGlMinus();
+	int vmin;
+	int vmax;
+
 
 private:
 	CButton anzeigen;
@@ -33,6 +36,7 @@ private:
 	CListBox auswahl;
 	int scalePoint(int p, CSize* s1, CSize* s2);
 	CRect drawRegion;
+	bool row[MAX_ZEILEN];
 
 public:
 	//virtual BOOL Create(LPCTSTR lpszTemplateName, CWnd* pParentWnd = NULL);
@@ -41,4 +45,6 @@ public:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnPaint();
 	afx_msg void OnClose();
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
 };

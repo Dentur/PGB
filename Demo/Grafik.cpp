@@ -6,7 +6,7 @@
 #include "Grafik.h"
 #include "afxdialogex.h"
 #include "dialogfont.h"
-#include "Daten.h"
+//#include "Daten.h"
 #include "draw.h"
 
 
@@ -57,6 +57,10 @@ Grafik::Grafik(CWnd* pParent /*=NULL*/)
 	SetWindowText("Grafik: " + DemoData.get_name());
 	MoveWindow(&r, TRUE);
 	ShowWindow(SW_SHOW);
+	for (int index = 0; index < MAX_ZEILEN; index++)
+	{
+		row[index] = false;
+	}
 }
 
 Grafik::~Grafik()
@@ -82,6 +86,8 @@ BEGIN_MESSAGE_MAP(Grafik, CDialog)
 	ON_BN_CLICKED(GLMINUS, OnGlMinus)
 
 	ON_WM_CLOSE()
+	ON_WM_LBUTTONDOWN()
+	ON_WM_LBUTTONDBLCLK()
 END_MESSAGE_MAP()
 
 
@@ -184,7 +190,7 @@ void Grafik::OnPaint()
 		vmin = 1;
 	for (int index = 0; index < DemoData.get_anz_z(); index++)
 	{
-		for (int jndex = vmin-1; jndex < vmax; jndex++)
+		for (int jndex = vmin - 1; jndex < vmax; jndex++)
 		{
 			int wert = DemoData.get_wert(index, jndex);
 			if (wert < minV)
@@ -252,4 +258,66 @@ void Grafik::OnGlMinus()
 void Grafik::OnGlPlus()
 {
 
+}
+
+
+void Grafik::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	int minV;
+	int maxV;
+	minV = DemoData.maximum();
+	maxV = DemoData.minimum();
+	//get the min and max values
+	if (vmax > DemoData.get_anz_s())
+		vmax = DemoData.get_anz_s();
+	if (vmin < 1)
+		vmin = 1;
+	for (int index = 0; index < DemoData.get_anz_z(); index++)
+	{
+		for (int jndex = vmin - 1; jndex < vmax; jndex++)
+		{
+			int wert = DemoData.get_wert(index, jndex);
+			if (wert < minV)
+			{
+				minV = wert;
+			}
+			else
+			{
+				if (wert > maxV)
+				{
+					maxV = wert;
+				}
+			}
+		}
+	}
+	CSize dataRangeHeight, dataRangeWidth, windowRangeHeight, windowRangeWidth;
+	dataRangeHeight = CSize(minV, maxV);
+	dataRangeWidth = CSize(vmin - 1, vmax-1);
+	windowRangeHeight = CSize(drawRegion.top + abstand, drawRegion.bottom - abstand);
+	windowRangeWidth = CSize(drawRegion.left + abstand, drawRegion.right + abstand);
+
+	
+	for (int index = 0; index < auswahl.GetCount(); index++)
+	{
+		for (int jndex = vmin - 1; jndex < vmax; jndex++)
+		{
+			CRect temp;
+			CPoint p = CPoint(scalePoint(jndex, &dataRangeWidth, & windowRangeWidth),scalePoint(DemoData.get_wert(index,jndex), &dataRangeHeight, &dataRangeWidth));
+			temp = CRect(p.x - abstand, p.y - abstand, p.x + abstand, p.y + abstand);
+			if (temp.PtInRect(point))
+			{
+				row[index] = !row[index];
+			}
+		}
+	}
+
+	CDialog::OnLButtonDown(nFlags, point);
+}
+
+
+void Grafik::OnLButtonDblClk(UINT nFlags, CPoint point)
+{
+	// TODO: Fügen Sie hier Ihren Meldungsbehandlungscode ein, und/oder benutzen Sie den Standard.
+
+	CDialog::OnLButtonDblClk(nFlags, point);
 }
