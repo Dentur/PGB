@@ -122,6 +122,7 @@
     <ClInclude Include="Tabelle.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestdatenGenerieren.h" />
+    <ClInclude Include="usermsg.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AusReihe.cpp" />
@@ -146,6 +147,7 @@
     </ClCompile>
     <ClCompile Include="Tabelle.cpp" />
     <ClCompile Include="TestdatenGenerieren.cpp" />
+    <ClCompile Include="usermsg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Demo.reg" />
