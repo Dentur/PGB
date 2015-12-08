@@ -23,4 +23,5 @@ public:
 	int anzahl_z;
 	int anzahl_s;
 	virtual void OnOK();
+	afx_msg void OnBnClickedOk();
 };

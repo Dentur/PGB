@@ -115,3 +115,29 @@ void Legende::OnLButtonDblClk(UINT nFlags, CPoint point)
 	}
 	CDialog::OnLButtonDblClk(nFlags, point);
 }
+
+
+BOOL Legende::OnWndMsg(UINT message, WPARAM wParam, LPARAM lParam, LRESULT* pResult)
+{
+	switch (message)
+	{
+	case UPDATE_NAME:
+
+		break;
+	case UPDATE_REIHE:
+		RedrawWindow();
+		break;
+	case UPDATE_WERT:
+
+		break;
+	case UPDATE_ALL:
+		if ((lParam&FLAG_FARBE) || (lParam&FLAG_NAME))
+			RedrawWindow();
+		break;
+	default:
+		break;
+	}
+
+
+	return CDialog::OnWndMsg(message, wParam, lParam, pResult);
+}

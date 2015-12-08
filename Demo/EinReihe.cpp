@@ -108,7 +108,10 @@ void EinReihe::OnBnClickedSpeichern()
 	{
 		DemoData.set_rname(reihe - 1, name);
 		GetParentFrame()->GetActiveDocument()->SetModifiedFlag();
+		update_reihe(reihe - 1, true, false);
 	}
+
+
 	UpdateData(FALSE);
 }
 

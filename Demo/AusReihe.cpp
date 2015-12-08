@@ -317,3 +317,41 @@ void AusReihe::OnLButtonDblClk(UINT nFlags, CPoint point)
 	}
 	CDialog::OnLButtonDblClk(nFlags, point);
 }
+
+
+BOOL AusReihe::OnWndMsg(UINT message, WPARAM wParam, LPARAM lParam, LRESULT* pResult)
+{
+	switch (message)
+	{
+	case UPDATE_NAME:
+		SetWindowText(DemoData.get_name());
+		break;
+	case UPDATE_REIHE:
+		if (lParam&FLAG_NAME)
+		{
+			m_reihe.DeleteString(wParam);
+			m_reihe.InsertString(wParam, DemoData.get_rname(wParam));
+		}
+		if (lParam&FLAG_FARBE)
+			RedrawWindow();
+		break;
+	case UPDATE_WERT:
+		if (wParam == m_selection)
+		{
+			RedrawWindow();
+		}
+		break;
+	case UPDATE_ALL:
+		if (lParam&FLAG_NAME)
+		{
+			m_reihe.Clear();
+
+			for (int i = 0; i < DemoData.get_anz_z(); i++)
+				m_reihe.InsertString(i, DemoData.get_rname(i));
+		}
+		break;
+	default:
+		break;
+	}
+	return CDialog::OnWndMsg(message, wParam, lParam, pResult);
+}

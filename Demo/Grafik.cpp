@@ -221,20 +221,43 @@ void Grafik::OnPaint()
 		if (!auswahl.GetSel(index))
 			continue;
 		CPen tempBrush = CPen(PS_SOLID, 5,DemoData.get_farbe(index));
-		dc.SelectObject(&tempBrush);
+		
 		for (int jndex = vmin-1; jndex < vmax; jndex++)
 		{
+			//Draw the line
+			dc.SelectObject(&tempBrush);
 			CPoint p = CPoint(scalePoint(jndex, &CSize(vmin-1, vmax-1), &CSize(drawRegion.left + abstand, drawRegion.right - abstand)), scalePoint(DemoData.get_wert(index, jndex), &CSize(minV, maxV), &CSize(drawRegion.top + abstand, drawRegion.bottom - abstand)));
 			if (jndex == vmin-1)
 				dc.MoveTo(p);
 			else
 				dc.LineTo(p);
+			//Draw the numbers
+			dc.SelectObject(&stdbrush.yellow);
+			dc.SelectObject(&stdpen.black1);
+			dc.SetBkMode(TRANSPARENT);
+			if (row[index])
+			{
+				CRect CRNumber(p.x, p.y, 0, 0);
+				CString s;
+				s.Format("%d", DemoData.get_wert(index, jndex));
+				dc.DrawText(s, &CRNumber, DT_CALCRECT);
+				CRNumber.OffsetRect(0, -(CRNumber.Height() + 5));
+				dc.Rectangle(&CRNumber);
+				dc.DrawText(s, &CRNumber, DT_SINGLELINE | DT_VCENTER | DT_CENTER);
+			}
 		}
 	}
 
+	//Draw the nuumber
+	for (int index = 0; index < auswahl.GetCount(); index++)
+	{
+		for (int jndex = vmin - 1; jndex < vmax; jndex++)
+		{
+			CRect temp;
 
-
-
+		}
+	}
+	
 	UpdateData(FALSE);
 }
 
@@ -310,7 +333,7 @@ void Grafik::OnLButtonDown(UINT nFlags, CPoint point)
 			}
 		}
 	}
-
+	RedrawWindow();
 	CDialog::OnLButtonDown(nFlags, point);
 }
 
@@ -320,4 +343,40 @@ void Grafik::OnLButtonDblClk(UINT nFlags, CPoint point)
 	// TODO: Fügen Sie hier Ihren Meldungsbehandlungscode ein, und/oder benutzen Sie den Standard.
 
 	CDialog::OnLButtonDblClk(nFlags, point);
+}
+
+
+BOOL Grafik::OnWndMsg(UINT message, WPARAM wParam, LPARAM lParam, LRESULT* pResult)
+{
+
+	switch (message)
+	{
+	case UPDATE_NAME:
+		SetWindowText(DemoData.get_name());
+		break;
+	case UPDATE_REIHE:
+		if (lParam&FLAG_NAME)
+		{
+			auswahl.DeleteString(wParam);
+			auswahl.InsertString(wParam, DemoData.get_rname(wParam));
+		}
+		if (lParam&FLAG_FARBE)
+			RedrawWindow();
+		break;
+	case UPDATE_WERT:
+		RedrawWindow();
+		break;
+	case UPDATE_ALL:
+		//auswahl.empty
+		if (lParam&FLAG_NAME)
+		{
+			//Listbox clearen und neu füllen
+		}
+		if (lParam&FLAG_WERT)
+			RedrawWindow();
+		break;
+	default:
+		break;
+	}
+	return CDialog::OnWndMsg(message, wParam, lParam, pResult);
 }

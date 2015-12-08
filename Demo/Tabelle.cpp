@@ -261,6 +261,7 @@ void Tabelle::OnRButtonDown(UINT nFlags, CPoint point)
 		CString s;
 		s.Format("%d", DemoData.get_wert(selectedField.y,selectedField.x)-3+index);
 		menu.InsertMenu(index, MF_BYPOSITION | MF_STRING, MY_COMMAND_BASE+index, s);
+		update_wert(selectedField.y, selectedField.x);
 	}
 	RedrawWindow();
 	CPoint pos;
@@ -282,4 +283,30 @@ BOOL Tabelle::OnCommand(WPARAM wParam, LPARAM lParam)
 	}
 
 	return CDialog::OnCommand(wParam, lParam);
+}
+
+
+BOOL Tabelle::OnWndMsg(UINT message, WPARAM wParam, LPARAM lParam, LRESULT* pResult)
+{
+
+	switch (message)
+	{
+	case UPDATE_NAME:
+		SetWindowText(DemoData.get_name());
+		break;
+	case UPDATE_REIHE:
+		if (lParam&FLAG_NAME)
+			RedrawWindow();
+		break;
+	case UPDATE_WERT:
+		RedrawWindow();
+		break;
+	case UPDATE_ALL:
+		if ((lParam&FLAG_NAME) || (lParam&FLAG_WERT))
+			RedrawWindow();
+		break;
+	default:
+		break;
+	}
+	return CDialog::OnWndMsg(message, wParam, lParam, pResult);
 }

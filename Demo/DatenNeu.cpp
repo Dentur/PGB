@@ -37,6 +37,7 @@ void DatenNeu::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(DatenNeu, CDialog)
+	ON_BN_CLICKED(IDOK, &DatenNeu::OnBnClickedOk)
 END_MESSAGE_MAP()
 
 
@@ -55,5 +56,11 @@ void DatenNeu::OnOK()
 		}
 	}
 
+	CDialog::OnOK();
+}
+
+
+void DatenNeu::OnBnClickedOk()
+{
 	CDialog::OnOK();
 }

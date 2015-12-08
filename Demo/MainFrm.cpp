@@ -227,6 +227,7 @@ void CMainFrame::OnEingabeName()
 	{
 		DemoData.set_name(nn.name);
 		GetActiveDocument()->SetModifiedFlag();
+		update_name();
 	}
 }
 
@@ -320,6 +321,7 @@ void CMainFrame::OnEingabeTestdaten()
 
 	stdbrush.setall();
 	stdpen.setall();
+	update_all(true, true, true);
 }
 
 

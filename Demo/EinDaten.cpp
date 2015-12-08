@@ -145,6 +145,7 @@ void EinDaten::OnBnClickedSpeichern()
 	{
 		DemoData.set_wert(auswahl, nummer - 1, wert);
 		GetParentFrame()->GetActiveDocument()->SetModifiedFlag();
+		update_wert(auswahl, nummer - 1);
 	}
 	scroll_to(nummer + 1);
 	GotoDlgCtrl(GetDlgItem(IDC_WERT));
